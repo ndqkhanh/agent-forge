@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentForge — Speculative Multi-Agent Orchestration Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg-base:       #090d14;
+      --bg-surface:    #0e1420;
+      --bg-raised:     #141b27;
+      --bg-highlight:  #1a2235;
+      --accent:        #9B59B6;
+      --accent-bright: #b975d4;
+      --accent-dim:    #6b3d80;
+      --accent-glow:   rgba(155, 89, 182, 0.18);
+      --accent-glow-strong: rgba(155, 89, 182, 0.35);
+      --text-primary:  #e8edf5;
+      --text-secondary:#8a9ab8;
+      --text-muted:    #4d5e7a;
+      --border:        rgba(155, 89, 182, 0.18);
+      --border-subtle: rgba(255,255,255,0.06);
+      --success:       #2ecc71;
+      --warning:       #f39c12;
+      --info:          #3498db;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── scrollbar ─────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 3px; }
+
+    /* ─── noise texture overlay ─────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── layout ─────────────────────────────────────────── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { padding: 96px 0; }
+
+    /* ─── animation utilities ────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ─── section label ──────────────────────────────────── */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      max-width: 640px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    /* ─── divider ────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       HEADER / HERO
+    ══════════════════════════════════════════════════════ */
+    header {
+      position: relative;
+      padding: 120px 0 96px;
+      overflow: hidden;
+    }
+
+    /* grid bg */
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(155,89,182,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(155,89,182,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+    }
+
+    /* radial glow */
+    header::after {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(155,89,182,0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-glow);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--accent-bright);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .header-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-bright);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(48px, 8vw, 88px);
+      font-weight: 400;
+      line-height: 1.0;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent-bright), #d48ae8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(13px, 1.5vw, 15px);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .hero-tagline {
+      max-width: 660px;
+      font-size: clamp(15px, 2vw, 17px);
+      line-height: 1.75;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+    .hero-tagline strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 0 0 0 var(--accent-glow-strong);
+    }
+    .btn-primary:hover {
+      background: var(--accent-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--accent-glow-strong);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      transition: border-color 0.25s, color 0.25s, transform 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent-bright);
+      transform: translateY(-2px);
+    }
+
+    .author-line {
+      margin-top: 56px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .author-line::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+    .author-line strong {
+      color: var(--text-secondary);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       STATS BAR
+    ══════════════════════════════════════════════════════ */
+    .stats-bar {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 48px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stat-item {
+      padding: 0 32px;
+      border-right: 1px solid var(--border-subtle);
+      text-align: center;
+    }
+    .stat-item:first-child { padding-left: 0; }
+    .stat-item:last-child { border-right: none; padding-right: 0; }
+
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .stat-number span {
+      color: var(--accent-bright);
+    }
+
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .stat-sub {
+      font-size: 11px;
+      color: var(--success);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 4px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       KEY INNOVATION
+    ══════════════════════════════════════════════════════ */
+    #innovation {
+      background: var(--bg-base);
+    }
+
+    .section-header {
+      margin-bottom: 64px;
+    }
+
+    /* CPU analogy table */
+    .analogy-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 64px;
+    }
+
+    .analogy-header-cpu,
+    .analogy-header-af {
+      padding: 18px 28px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .analogy-header-cpu {
+      background: var(--bg-raised);
+      color: var(--info);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .analogy-header-af {
+      background: var(--bg-raised);
+      color: var(--accent-bright);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .analogy-cell {
+      padding: 20px 28px;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      line-height: 1.5;
+    }
+    .analogy-cell-cpu {
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .analogy-cell-cpu:last-of-type { border-bottom: none; }
+    .analogy-cell-af {
+      background: var(--bg-raised);
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .analogy-cell-af:last-of-type { border-bottom: none; }
+
+    .cell-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+    }
+
+    .cpu-icon { color: var(--info); }
+    .af-icon  { color: var(--accent); }
+
+    /* lifecycle flow */
+    .lifecycle {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .lifecycle-step {
+      flex: 1;
+      min-width: 120px;
+      padding: 28px 20px;
+      text-align: center;
+      position: relative;
+    }
+    .lifecycle-step + .lifecycle-step::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 48px;
+      background: var(--border-subtle);
+    }
+
+    .lifecycle-step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .lifecycle-step-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .lifecycle-step-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .lifecycle-step-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .lifecycle-step.commit .lifecycle-step-name { color: var(--success); }
+    .lifecycle-step.rollback .lifecycle-step-name { color: #e74c3c; }
+
+    /* confidence decay */
+    .decay-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .decay-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent-bright), var(--accent-dim));
+    }
+
+    .decay-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .decay-levels {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .decay-level {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .decay-depth {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      width: 64px;
+      flex-shrink: 0;
+    }
+
+    .decay-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-raised);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .decay-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .decay-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      width: 44px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       ARCHITECTURE DIAGRAM
+    ══════════════════════════════════════════════════════ */
+    #architecture {
+      background: var(--bg-surface);
+    }
+
+    .diagram-wrapper {
+      background: var(--bg-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 48px 32px;
+      overflow: auto;
+    }
+
+    .mermaid {
+      text-align: center;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       COMPONENT DEEP DIVE
+    ══════════════════════════════════════════════════════ */
+    #components {
+      background: var(--bg-base);
+    }
+
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .comp-card {
+      background: var(--bg-surface);
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s;
+      position: relative;
+    }
+    .comp-card:hover { background: var(--bg-raised); }
+    .comp-card.active { background: var(--bg-raised); }
+    .comp-card.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent);
+    }
+
+    .comp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 28px;
+    }
+
+    .comp-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .comp-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--accent-glow);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .comp-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .comp-tag {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-highlight);
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+    }
+
+    .comp-chevron {
+      color: var(--text-muted);
+      transition: transform 0.3s ease, color 0.2s;
+      flex-shrink: 0;
+    }
+    .comp-card.active .comp-chevron {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+
+    .comp-body {
+      display: none;
+      padding: 0 28px 28px;
+      color: var(--text-secondary);
+      font-size: 13.5px;
+      line-height: 1.7;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 0;
+    }
+    .comp-card.active .comp-body { display: block; padding-top: 20px; }
+
+    .comp-body ul {
+      padding-left: 16px;
+      margin-top: 8px;
+    }
+    .comp-body ul li { margin-bottom: 6px; }
+
+    .comp-body code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: var(--bg-highlight);
+      color: var(--accent-bright);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       MODULE STRUCTURE
+    ══════════════════════════════════════════════════════ */
+    #modules {
+      background: var(--bg-surface);
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .module-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 28px 24px;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .module-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .module-card:hover {
+      border-color: var(--border);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--border);
+    }
+    .module-card:hover::after { opacity: 1; }
+
+    .module-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--accent-bright);
+      margin-bottom: 10px;
+    }
+
+    .module-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .module-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .module-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: 4px;
+      background: var(--bg-highlight);
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       TECH STACK
+    ══════════════════════════════════════════════════════ */
+    #tech-stack {
+      background: var(--bg-base);
+    }
+
+    .tech-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tech-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: border-color 0.25s, color 0.25s, transform 0.2s;
+      cursor: default;
+    }
+    .tech-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent-bright);
+      transform: translateY(-2px);
+    }
+    .tech-tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════ */
+    footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-text span { color: var(--accent); }
+    .footer-text strong { color: var(--success); }
+
+    .footer-tdd {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .tdd-step {
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .tdd-red    { background: rgba(231,76,60,0.15);  color: #e74c3c; }
+    .tdd-green  { background: rgba(46,204,113,0.15); color: #2ecc71; }
+    .tdd-refact { background: rgba(52,152,219,0.15); color: #3498db; }
+    .tdd-arrow  { color: var(--text-muted); }
+
+    /* ══════════════════════════════════════════════════════
+       NAV
+    ══════════════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(9,13,20,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      transition: background 0.3s;
+    }
+
+    .nav-brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: var(--border-subtle);
+      }
+      .stat-item {
+        padding: 28px 20px;
+        border-right: none;
+        border-bottom: none;
+        background: var(--bg-surface);
+      }
+      .components-grid { grid-template-columns: 1fr; }
+      .modules-grid { grid-template-columns: repeat(2, 1fr); }
+      .analogy-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .analogy-header-cpu,
+      .analogy-header-af {
+        display: none;
+      }
+      .analogy-cell-cpu::before {
+        content: 'CPU';
+        display: block;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--info);
+        margin-bottom: 4px;
+      }
+      .analogy-cell-af::before {
+        content: 'AgentForge';
+        display: block;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent-bright);
+        margin-bottom: 4px;
+      }
+      .lifecycle {
+        flex-direction: column;
+      }
+      .lifecycle-step + .lifecycle-step::before {
+        display: none;
+      }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 88px 0 64px; }
+      section { padding: 64px 0; }
+      .modules-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── Mermaid theme overrides ── */
+    .mermaid svg { max-width: 100%; height: auto; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-brand">
+      <span class="nav-brand-dot"></span>
+      AgentForge
+    </a>
+    <ul class="nav-links">
+      <li><a href="#innovation">Innovation</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#components">Components</a></li>
+      <li><a href="#modules">Modules</a></li>
+      <li><a href="#tech-stack">Tech Stack</a></li>
+      <li><a href="https://github.com/ndqkhanh/agent-forge" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header>
+    <div class="container">
+      <div class="header-badge reveal">
+        <span class="header-badge-dot"></span>
+        FAANG Staff Engineer Portfolio
+      </div>
+      <h1 class="hero-title reveal reveal-delay-1">
+        Agent<span>Forge</span>
+      </h1>
+      <p class="hero-subtitle reveal reveal-delay-2">Speculative Multi-Agent Orchestration Platform</p>
+      <p class="hero-tagline reveal reveal-delay-3">
+        What if your AI agents could <strong>predict the future?</strong> AgentForge applies
+        CPU branch prediction to multi-agent pipelines — speculating on task outputs and
+        pre-executing dependents for <strong>~40% latency reduction.</strong>
+      </p>
+      <div class="hero-actions reveal reveal-delay-4">
+        <a href="https://github.com/ndqkhanh/agent-forge" target="_blank" rel="noopener" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <a href="#innovation" class="btn-ghost">
+          Explore Architecture →
+        </a>
+      </div>
+      <div class="author-line reveal reveal-delay-5">
+        by <strong>Nguyen Dinh Quang Khanh</strong>
+      </div>
+    </div>
+  </header>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-number"><span>136</span></div>
+          <div class="stat-label">Tests Written</div>
+          <div class="stat-sub">✓ 0 failures</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+          <div class="stat-number"><span>~40</span>%</div>
+          <div class="stat-label">Latency Reduction</div>
+          <div class="stat-sub">vs. sequential execution</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+          <div class="stat-number"><span>5</span></div>
+          <div class="stat-label">Maven Modules</div>
+          <div class="stat-sub">clean separation of concerns</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-3">
+          <div class="stat-number"><span>3</span></div>
+          <div class="stat-label">Max Speculation Depth</div>
+          <div class="stat-sub">cascading confidence decay</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- KEY INNOVATION -->
+  <section id="innovation">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Core Innovation</div>
+        <h2 class="section-title reveal reveal-delay-1">CPU Branch Prediction<br><em>for AI Agents</em></h2>
+        <p class="section-subtitle reveal reveal-delay-2">
+          Modern CPUs don't stall on conditional branches — they speculate. AgentForge brings this
+          same principle to multi-agent pipelines, turning sequential bottlenecks into parallelized
+          pre-execution with bounded recovery on mispredict.
+        </p>
+      </div>
+
+      <!-- Analogy Table -->
+      <div class="analogy-wrapper reveal">
+        <div class="analogy-header-cpu">CPU Architecture</div>
+        <div class="analogy-header-af">AgentForge Equivalent</div>
+
+        <div class="analogy-cell analogy-cell-cpu">
+          <svg class="cell-icon cpu-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="12" height="12" rx="2"/><path d="M7 2v2M10 2v2M13 2v2M7 16v2M10 16v2M13 16v2M2 7h2M2 10h2M2 13h2M16 7h2M16 10h2M16 13h2"/></svg>
+          Branch instruction — conditional branch whose outcome determines which path the CPU executes
+        </div>
+        <div class="analogy-cell analogy-cell-af">
+          <svg class="cell-icon af-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 3"/></svg>
+          Predecessor task whose output determines the input to the next agent in the DAG
+        </div>
+
+        <div class="analogy-cell analogy-cell-cpu">
+          <svg class="cell-icon cpu-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h14M3 6h14M3 14h14"/></svg>
+          Branch predictor — uses branch history table to guess the likely outcome before it is known
+        </div>
+        <div class="analogy-cell analogy-cell-af">
+          <svg class="cell-icon af-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3l1.5 4.5H16l-3.8 2.7 1.5 4.5L10 12l-3.7 2.7 1.5-4.5L4 7.5h4.5z"/></svg>
+          <code style="font-family:inherit;background:none;color:inherit">PredictionModel</code> — frequency-based statistical predictor with historical learning and confidence scoring
+        </div>
+
+        <div class="analogy-cell analogy-cell-cpu">
+          <svg class="cell-icon cpu-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="16" height="8" rx="2"/><path d="M6 6V4M10 6V4M14 6V4M6 14v2M10 14v2M14 14v2"/></svg>
+          Reorder buffer — holds speculative results in-flight until the branch resolves
+        </div>
+        <div class="analogy-cell analogy-cell-af">
+          <svg class="cell-icon af-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h12v2H4zM4 10h8v2H4z"/><rect x="2" y="4" width="16" height="12" rx="2"/></svg>
+          <code style="font-family:inherit;background:none;color:inherit">BufferedMCPClient</code> — reorder buffer pattern; holds tool calls in a side-effect buffer until validation
+        </div>
+
+        <div class="analogy-cell analogy-cell-cpu">
+          <svg class="cell-icon cpu-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3l14 14M17 3L3 17"/></svg>
+          Pipeline flush on mispredict — all speculative work is discarded; CPU rewinds to branch point
+        </div>
+        <div class="analogy-cell analogy-cell-af">
+          <svg class="cell-icon af-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4l12 12M7 3a7 7 0 1 1 0 14"/></svg>
+          <code style="font-family:inherit;background:none;color:inherit">RollbackCoordinator</code> — discards buffered side effects and restores the pre-speculation checkpoint
+        </div>
+
+        <div class="analogy-cell analogy-cell-cpu">
+          <svg class="cell-icon cpu-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10l5 5 8-8"/></svg>
+          Architectural commit — speculative results promoted to permanent architectural state
+        </div>
+        <div class="analogy-cell analogy-cell-af">
+          <svg class="cell-icon af-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10l5 5 8-8"/></svg>
+          Buffered tool calls flushed from <code style="font-family:inherit;background:none;color:inherit">BufferedMCPClient</code> to real MCP execution on successful validation
+        </div>
+      </div>
+
+      <!-- Lifecycle -->
+      <div class="section-label reveal" style="margin-bottom:24px">Speculation Lifecycle</div>
+      <div class="lifecycle reveal reveal-delay-1">
+        <div class="lifecycle-step">
+          <div class="lifecycle-step-num">01</div>
+          <div class="lifecycle-step-icon">🔮</div>
+          <div class="lifecycle-step-name">Predict</div>
+          <div class="lifecycle-step-desc">PredictionModel scores candidate outputs; confidence threshold gating</div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-step-num">02</div>
+          <div class="lifecycle-step-icon">⚡</div>
+          <div class="lifecycle-step-name">Speculate</div>
+          <div class="lifecycle-step-desc">SpeculationEngine spawns speculative task with predicted input via Virtual Thread</div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-step-num">03</div>
+          <div class="lifecycle-step-icon">🏃</div>
+          <div class="lifecycle-step-name">Execute Speculatively</div>
+          <div class="lifecycle-step-desc">Agent runs with BufferedMCPClient; all side effects held in reorder buffer</div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-step-num">04</div>
+          <div class="lifecycle-step-icon">🔍</div>
+          <div class="lifecycle-step-name">Validate</div>
+          <div class="lifecycle-step-desc">Predecessor actual output compared against predicted input used for speculation</div>
+        </div>
+        <div class="lifecycle-step commit">
+          <div class="lifecycle-step-num">05a</div>
+          <div class="lifecycle-step-icon">✅</div>
+          <div class="lifecycle-step-name">Commit</div>
+          <div class="lifecycle-step-desc">Buffer flushed to real execution; latency saved equals speculative duration</div>
+        </div>
+        <div class="lifecycle-step rollback">
+          <div class="lifecycle-step-num">05b</div>
+          <div class="lifecycle-step-icon">↩️</div>
+          <div class="lifecycle-step-name">Rollback</div>
+          <div class="lifecycle-step-desc">RollbackCoordinator discards buffer; CheckpointManager restores prior state</div>
+        </div>
+      </div>
+
+      <!-- Confidence Decay -->
+      <div class="decay-card reveal" style="margin-top:48px">
+        <div class="decay-title">Cascading Confidence Decay — depth × decay_factor</div>
+        <div class="decay-levels" id="decayLevels">
+          <div class="decay-level">
+            <span class="decay-depth">Depth 0</span>
+            <div class="decay-bar-wrap">
+              <div class="decay-bar" data-width="100" style="background: linear-gradient(90deg, #9B59B6, #b975d4); width: 0%"></div>
+            </div>
+            <span class="decay-pct" style="color:#b975d4">100%</span>
+          </div>
+          <div class="decay-level">
+            <span class="decay-depth">Depth 1</span>
+            <div class="decay-bar-wrap">
+              <div class="decay-bar" data-width="80" style="background: linear-gradient(90deg, #7d4695, #9B59B6); width: 0%"></div>
+            </div>
+            <span class="decay-pct" style="color:#9B59B6">80%</span>
+          </div>
+          <div class="decay-level">
+            <span class="decay-depth">Depth 2</span>
+            <div class="decay-bar-wrap">
+              <div class="decay-bar" data-width="64" style="background: linear-gradient(90deg, #5c3470, #7d4695); width: 0%"></div>
+            </div>
+            <span class="decay-pct" style="color:#7d4695">64%</span>
+          </div>
+          <div class="decay-level">
+            <span class="decay-depth">Depth 3</span>
+            <div class="decay-bar-wrap">
+              <div class="decay-bar" data-width="51" style="background: linear-gradient(90deg, #3d2350, #5c3470); width: 0%"></div>
+            </div>
+            <span class="decay-pct" style="color:#5c3470">51%</span>
+          </div>
+          <div class="decay-level">
+            <span class="decay-depth">Depth 4+</span>
+            <div class="decay-bar-wrap">
+              <div class="decay-bar" data-width="25" style="background: linear-gradient(90deg, #261538, #3d2350); width: 0%"></div>
+            </div>
+            <span class="decay-pct" style="color:#4d5e7a">≤41% — speculation halted</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ARCHITECTURE -->
+  <section id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">System Design</div>
+        <h2 class="section-title reveal reveal-delay-1">Architecture Overview</h2>
+        <p class="section-subtitle reveal reveal-delay-2">
+          A DAG-driven orchestration pipeline with speculative execution, exactly-once event delivery,
+          human-in-the-loop gates, and Redis-backed checkpoint recovery.
+        </p>
+      </div>
+      <div class="diagram-wrapper reveal reveal-delay-1">
+        <div class="mermaid">
+flowchart TD
+    GW["🌐 REST Gateway"]:::gateway
+
+    subgraph ORCH["Orchestrator"]
+        WE["WorkflowEngine\nDAG topological sort\nVirtual Thread fan-out"]:::core
+        SE["SpeculationEngine\nPredictionModel\nConfidenceScorer"]:::spec
+        CP["CheckpointManager\nRedis CAS / TTL"]:::state
+        RC["RollbackCoordinator\non mispredict"]:::rollback
+    end
+
+    subgraph AGENTS["Agent Pool"]
+        AR["AgentRuntime\nSummarizerAgent\nClassifierAgent"]:::agent
+        MC["MCPClient\nJSON-RPC 2.0\nmulti-server routing"]:::client
+        AC["A2AClient\nAgent Cards\ncapability delegation"]:::client
+        BM["BufferedMCPClient\nreorder buffer\nspeculation buffer"]:::spec
+    end
+
+    subgraph INFRA["Infrastructure"]
+        KB["Kafka EventBus\nexactly-once\ntransactional semantics"]:::infra
+        HG["HITLGateManager\nasync approve/reject\nCompletableFuture"]:::hitl
+    end
+
+    GW --> WE
+    WE --> SE
+    SE --> CP
+    WE --> AR
+    AR --> MC
+    AR --> AC
+    AR --> BM
+    BM -- "validation miss" --> RC
+    RC -- "restore" --> CP
+    WE --> KB
+    WE --> HG
+
+    classDef gateway fill:#1a2235,stroke:#9B59B6,color:#e8edf5,rx:8
+    classDef core    fill:#141b27,stroke:#3498db,color:#e8edf5
+    classDef spec    fill:#141b27,stroke:#9B59B6,color:#e8edf5
+    classDef state   fill:#141b27,stroke:#f39c12,color:#e8edf5
+    classDef rollback fill:#141b27,stroke:#e74c3c,color:#e8edf5
+    classDef agent   fill:#0e1420,stroke:#2ecc71,color:#e8edf5
+    classDef client  fill:#0e1420,stroke:#3498db,color:#8a9ab8
+    classDef infra   fill:#0e1420,stroke:#f39c12,color:#8a9ab8
+    classDef hitl    fill:#0e1420,stroke:#e67e22,color:#8a9ab8
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- COMPONENT DEEP DIVE -->
+  <section id="components">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Implementation Detail</div>
+        <h2 class="section-title reveal reveal-delay-1">Component Deep Dive</h2>
+        <p class="section-subtitle reveal reveal-delay-2">
+          Click any component to expand its design decisions, key mechanisms, and implementation highlights.
+        </p>
+      </div>
+
+      <div class="components-grid reveal reveal-delay-1">
+
+        <!-- 1 -->
+        <div class="comp-card" data-comp="dag">
+          <div class="comp-header">
+            <div class="comp-header-left">
+              <div class="comp-icon">🗺</div>
+              <div>
+                <div class="comp-name">WorkflowEngine</div>
+                <div class="comp-tag">DAG · Orchestrator</div>
+              </div>
+            </div>
+            <svg class="comp-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="comp-body">
+            Kahn's algorithm for topological sort ensures correct task ordering. Parallel fan-out
+            and fan-in use Java 21 Virtual Threads for lightweight concurrency without blocking OS threads.
+            <ul>
+              <li>Diamond DAG patterns fully supported — multiple predecessors converge correctly</li>
+              <li>Failure propagation cancels all downstream tasks on predecessor exception</li>
+              <li><code>StructuredTaskScope.ShutdownOnFailure</code> ensures clean cancellation semantics</li>
+              <li>Fan-out spawns N speculative branches simultaneously; fan-in waits via <code>CompletableFuture.allOf</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="comp-card" data-comp="spec">
+          <div class="comp-header">
+            <div class="comp-header-left">
+              <div class="comp-icon">⚡</div>
+              <div>
+                <div class="comp-name">SpeculationEngine</div>
+                <div class="comp-tag">Speculation · Core</div>
+              </div>
+            </div>
+            <svg class="comp-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="comp-body">
+            Orchestrates the full speculative execution lifecycle. Receives DAG tasks from WorkflowEngine
+            and decides whether to speculate based on confidence threshold and depth limit.
+            <ul>
+              <li>Cascading confidence decay: <code>confidence × 0.8^depth</code></li>
+              <li>Depth limit of 3 prevents unbounded speculative parallelism</li>
+              <li>Tracks per-task hit/miss counts; exposes hit rate stats for observability</li>
+              <li>On validation miss, delegates rollback to <code>RollbackCoordinator</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="comp-card" data-comp="predict">
+          <div class="comp-header">
+            <div class="comp-header-left">
+              <div class="comp-icon">🧠</div>
+              <div>
+                <div class="comp-name">PredictionModel</div>
+                <div class="comp-tag">ML · Prediction</div>
+              </div>
+            </div>
+            <svg class="comp-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="comp-body">
+            Frequency-based statistical predictor. Maintains a historical table of task outputs
+            per workflow context. No LLM call required for prediction — pure statistical inference.
+            <ul>
+              <li>Records outcome frequencies per <code>(taskType, inputHash)</code> key</li>
+              <li>Returns the most-frequent past output as predicted value</li>
+              <li>Confidence score = <code>frequency / total_observations</code></li>
+              <li>Improves over time as more workflow runs are recorded</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="comp-card" data-comp="buffer">
+          <div class="comp-header">
+            <div class="comp-header-left">
+              <div class="comp-icon">📦</div>
+              <div>
+                <div class="comp-name">BufferedMCPClient</div>
+                <div class="comp-tag">Reorder Buffer · Side Effects</div>
+              </div>
+            </div>
+            <svg class="comp-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="comp-body">
+            Implements the CPU reorder buffer pattern for AI agent side effects. All MCP tool calls
+            during speculative execution are intercepted and held in memory — never committed to real state.
+            <ul>
+              <li>Wraps <code>MCPClient</code>; transparent to agent code via same interface</li>
+              <li>On <strong>commit</strong>: replays buffered calls to real <code>MCPClient</code> in order</li>
+              <li>On <strong>rollback</strong>: discards buffer — zero real-world side effects</li>
+              <li>Returns synthetic responses to agent during speculation (based on predicted state)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="comp-card" data-comp="mcp">
+          <div class="comp-header">
+            <div class="comp-header-left">
+              <div class="comp-icon">🔌</div>
+              <div>
+                <div class="comp-name">MCPClient</div>
+                <div class="comp-tag">Protocol · Tool Integration</div>
+              </div>
+            </div>
+            <svg class="comp-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="comp-body">
+            Full implementation of the Model Context Protocol over JSON-RPC 2.0. Enables agents to
+            discover and invoke tools from any MCP-compliant server.
+            <ul>
+              <li>Tool discovery via <code>tools/list</code> — dynamic capability enumeration</li>
+              <li>Multi-server routing: agents select server by tool namespace prefix</li>
+              <li>Tool invocation via <code>tools/call</code> with structured parameter binding</li>
+              <li>Built on <code>java.net.http.HttpClient</code> with async non-blocking I/O</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="comp-card" data-comp="a2a">
+          <div class="comp-header">
+            <div class="comp-header-left">
+              <div class="comp-icon">🤝</div>
+              <div>
+                <div class="comp-name">A2AClient</div>
+                <div class="comp-tag">Protocol · Agent-to-Agent</div>
+              </div>
+            </div>
+            <svg class="comp-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="comp-body">
+            Implements Google's Agent-to-Agent protocol for peer agent communication. Agents
+            self-describe capabilities via Agent Cards; delegation is capability-driven.
+            <ul>
+              <li>Agent Card fetching — discovers <code>skills</code>, <code>inputModes</code>, <code>outputModes</code></li>
+              <li>Capability matching: delegates tasks to best-fit peer by skill overlap</li>
+              <li>Full task lifecycle: <code>submitted → working → completed/failed</code></li>
+              <li>Supports SSE streaming responses for long-running delegated tasks</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="comp-card" data-comp="llm">
+          <div class="comp-header">
+            <div class="comp-header-left">
+              <div class="comp-icon">💬</div>
+              <div>
+                <div class="comp-name">LLMClient</div>
+                <div class="comp-tag">HTTP · LLM Integration</div>
+              </div>
+            </div>
+            <svg class="comp-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="comp-body">
+            Zero-dependency LLM client built on <code>java.net.http.HttpClient</code>. Supports
+            OpenAI-compatible APIs with streaming and automatic retry.
+            <ul>
+              <li>SSE streaming via <code>BodyHandlers.ofLines()</code> — no blocking reads</li>
+              <li>Exponential backoff retry with jitter on 429/503 responses</li>
+              <li>Jackson-based request/response serialization</li>
+              <li>Provider-agnostic: plug in OpenAI, Anthropic, or local Ollama endpoints</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="comp-card" data-comp="hitl">
+          <div class="comp-header">
+            <div class="comp-header-left">
+              <div class="comp-icon">🚦</div>
+              <div>
+                <div class="comp-name">HITLGateManager</div>
+                <div class="comp-tag">Human-in-the-Loop · Gates</div>
+              </div>
+            </div>
+            <svg class="comp-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="comp-body">
+            Suspends workflow execution at configured checkpoints to await human approval.
+            Gates are non-blocking — the workflow thread parks via <code>CompletableFuture</code>.
+            <ul>
+              <li>Gate configured per-task in workflow DAG definition</li>
+              <li>Pending approvals surfaced via REST API: <code>GET /gates/pending</code></li>
+              <li>Approve/reject via <code>POST /gates/{id}/approve</code> or <code>/reject</code></li>
+              <li>On reject, triggers <code>RollbackCoordinator</code> for the gated task subtree</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="comp-card" data-comp="kafka">
+          <div class="comp-header">
+            <div class="comp-header-left">
+              <div class="comp-icon">📡</div>
+              <div>
+                <div class="comp-name">Kafka EventBus</div>
+                <div class="comp-tag">Events · Exactly-Once</div>
+              </div>
+            </div>
+            <svg class="comp-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="comp-body">
+            Exactly-once transactional event publishing for all workflow state transitions.
+            Critical for audit trails and downstream consumers that cannot tolerate duplicates.
+            <ul>
+              <li><code>initTransactions()</code> called once at producer startup</li>
+              <li>Each event batch wrapped in <code>beginTransaction()</code> / <code>commitTransaction()</code></li>
+              <li>On exception, <code>abortTransaction()</code> prevents partial publishes</li>
+              <li>Event schema: <code>workflowId, taskId, status, timestamp, payload</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="comp-card" data-comp="checkpoint">
+          <div class="comp-header">
+            <div class="comp-header-left">
+              <div class="comp-icon">💾</div>
+              <div>
+                <div class="comp-name">CheckpointStore</div>
+                <div class="comp-tag">State · Redis-style</div>
+              </div>
+            </div>
+            <svg class="comp-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="comp-body">
+            Redis-backed persistence for agent state checkpoints. Used by <code>RollbackCoordinator</code>
+            to restore pre-speculation state on validation failure.
+            <ul>
+              <li>Optimistic locking via CAS (compare-and-swap) prevents concurrent write conflicts</li>
+              <li>TTL expiry ensures stale checkpoints don't accumulate indefinitely</li>
+              <li>Checkpoint taken before speculation begins; keyed by <code>(workflowId, taskId, speculationId)</code></li>
+              <li>Supports nested checkpoints for cascading speculation at depth 2 and 3</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- MODULES -->
+  <section id="modules">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Project Structure</div>
+        <h2 class="section-title reveal reveal-delay-1">Maven Module Architecture</h2>
+        <p class="section-subtitle reveal reveal-delay-2">
+          Clean separation of concerns across 5 modules with well-defined dependency boundaries.
+        </p>
+      </div>
+      <div class="modules-grid">
+        <div class="module-card reveal">
+          <div class="module-name">common</div>
+          <div class="module-desc">Shared domain models, interfaces, and utility classes. Zero dependencies on other modules — the foundation everything else builds on.</div>
+          <div class="module-tags">
+            <span class="module-tag">AgentTask</span>
+            <span class="module-tag">WorkflowResult</span>
+            <span class="module-tag">Interfaces</span>
+          </div>
+        </div>
+        <div class="module-card reveal reveal-delay-1">
+          <div class="module-name">orchestrator</div>
+          <div class="module-desc">Core orchestration logic: WorkflowEngine, SpeculationEngine, PredictionModel, BufferedMCPClient, RollbackCoordinator, CheckpointManager, HITL gates.</div>
+          <div class="module-tags">
+            <span class="module-tag">WorkflowEngine</span>
+            <span class="module-tag">SpeculationEngine</span>
+            <span class="module-tag">Virtual Threads</span>
+          </div>
+        </div>
+        <div class="module-card reveal reveal-delay-2">
+          <div class="module-name">agent-pool</div>
+          <div class="module-desc">AgentRuntime implementations: SummarizerAgent, ClassifierAgent, MCPClient, A2AClient, LLMClient. Each agent is a stateless request handler.</div>
+          <div class="module-tags">
+            <span class="module-tag">AgentRuntime</span>
+            <span class="module-tag">MCPClient</span>
+            <span class="module-tag">A2AClient</span>
+          </div>
+        </div>
+        <div class="module-card reveal reveal-delay-3">
+          <div class="module-name">gateway</div>
+          <div class="module-desc">REST API layer. Accepts workflow DAG submissions, exposes HITL gate endpoints, streams task status via SSE. Built with Java's built-in HTTP server.</div>
+          <div class="module-tags">
+            <span class="module-tag">REST API</span>
+            <span class="module-tag">SSE Streaming</span>
+            <span class="module-tag">HITL Endpoints</span>
+          </div>
+        </div>
+        <div class="module-card reveal reveal-delay-4">
+          <div class="module-name">event-bus</div>
+          <div class="module-desc">Kafka producer/consumer wrappers with exactly-once transactional semantics. Publishes all workflow lifecycle events for audit and downstream consumers.</div>
+          <div class="module-tags">
+            <span class="module-tag">Kafka</span>
+            <span class="module-tag">Exactly-Once</span>
+            <span class="module-tag">Transactions</span>
+          </div>
+        </div>
+        <div class="module-card reveal reveal-delay-5">
+          <div class="module-name">state-store</div>
+          <div class="module-desc">Redis-backed CheckpointStore with optimistic locking (CAS) and TTL expiry. Provides the durable state layer for speculation rollback and workflow recovery.</div>
+          <div class="module-tags">
+            <span class="module-tag">Redis</span>
+            <span class="module-tag">CAS</span>
+            <span class="module-tag">TTL Expiry</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TECH STACK -->
+  <section id="tech-stack">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Technology</div>
+        <h2 class="section-title reveal reveal-delay-1">Tech Stack</h2>
+        <p class="section-subtitle reveal reveal-delay-2">
+          Deliberately zero heavy frameworks — every dependency is justified by functional necessity.
+        </p>
+      </div>
+      <div class="tech-grid reveal reveal-delay-1">
+        <span class="tech-tag"><span class="tech-tag-dot"></span>Java 21</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>Virtual Threads (JEP 444)</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>StructuredTaskScope</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>MCP Protocol (JSON-RPC 2.0)</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>A2A Protocol</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>Kafka Exactly-Once</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>Jackson (serialization)</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>java.net.http.HttpClient</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>Redis (state store)</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>CompletableFuture</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>SSE Streaming</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>JUnit 5 (136 tests)</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>Mockito</span>
+        <span class="tech-tag"><span class="tech-tag-dot"></span>Maven Multi-Module</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p class="footer-text">
+        Built with <span>Java 21</span> &nbsp;·&nbsp; <strong>136 tests, 0 failures</strong> &nbsp;·&nbsp; FAANG Staff Engineer Portfolio
+      </p>
+      <div class="footer-tdd">
+        <span>TDD cycle:</span>
+        <span class="tdd-step tdd-red">Red</span>
+        <span class="tdd-arrow">→</span>
+        <span class="tdd-step tdd-green">Green</span>
+        <span class="tdd-arrow">→</span>
+        <span class="tdd-step tdd-refact">Refactor</span>
+        <span style="margin-left:4px">· repeat 136×</span>
+      </div>
+      <p style="margin-top:24px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-muted)">
+        <a href="https://github.com/ndqkhanh/agent-forge" target="_blank" rel="noopener"
+           style="color:var(--accent);text-decoration:none;">github.com/ndqkhanh/agent-forge</a>
+        &nbsp;·&nbsp; Nguyen Dinh Quang Khanh &nbsp;·&nbsp; 2025
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // ── Mermaid init ──────────────────────────────────────
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        background: '#141b27',
+        primaryColor: '#1a2235',
+        primaryTextColor: '#e8edf5',
+        primaryBorderColor: '#9B59B6',
+        lineColor: '#4d5e7a',
+        secondaryColor: '#0e1420',
+        tertiaryColor: '#141b27',
+        nodeBorder: '#9B59B6',
+        clusterBkg: '#0e1420',
+        clusterBorder: '#2a3550',
+        titleColor: '#e8edf5',
+        edgeLabelBackground: '#141b27',
+        fontSize: '13px',
+      },
+      flowchart: {
+        htmlLabels: true,
+        curve: 'basis',
+        padding: 20,
+      },
+    });
+
+    // ── IntersectionObserver for reveal animations ────────
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // ── Decay bars — animate when section enters view ─────
+    const decaySection = document.getElementById('decayLevels');
+    const decayBars = decaySection ? decaySection.querySelectorAll('.decay-bar') : [];
+    const decayObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          decayBars.forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+          });
+          decayObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    if (decaySection) decayObs.observe(decaySection);
+
+    // ── Expandable component cards ────────────────────────
+    document.querySelectorAll('.comp-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const wasActive = card.classList.contains('active');
+        // close all
+        document.querySelectorAll('.comp-card').forEach(c => c.classList.remove('active'));
+        // toggle clicked
+        if (!wasActive) card.classList.add('active');
+      });
+    });
+
+    // ── Nav scroll effect ─────────────────────────────────
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.style.background = 'rgba(9,13,20,0.96)';
+      } else {
+        nav.style.background = 'rgba(9,13,20,0.85)';
+      }
+    }, { passive: true });
+
+    // ── Stat counter animation ────────────────────────────
+    function animateCounter(el, target, suffix) {
+      const duration = 1400;
+      const start = performance.now();
+      const isFloat = String(target).includes('.');
+      const update = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(target * eased * 10) / 10;
+        el.textContent = (isFloat ? current.toFixed(1) : current) + (suffix || '');
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target + (suffix || '');
+      };
+      requestAnimationFrame(update);
+    }
+
+    const statsData = [
+      { selector: '.stats-grid .stat-item:nth-child(1) .stat-number span', target: 136, suffix: '' },
+      { selector: '.stats-grid .stat-item:nth-child(2) .stat-number', target: '~40', special: true },
+      { selector: '.stats-grid .stat-item:nth-child(3) .stat-number span', target: 5, suffix: '' },
+      { selector: '.stats-grid .stat-item:nth-child(4) .stat-number span', target: 3, suffix: '' },
+    ];
+
+    const statsBar = document.querySelector('.stats-bar');
+    const statsObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          // animate stat 1
+          animateCounter(
+            document.querySelector('.stats-grid .stat-item:nth-child(1) .stat-number span'),
+            136, ''
+          );
+          // animate stat 3
+          animateCounter(
+            document.querySelector('.stats-grid .stat-item:nth-child(3) .stat-number span'),
+            5, ''
+          );
+          // animate stat 4
+          animateCounter(
+            document.querySelector('.stats-grid .stat-item:nth-child(4) .stat-number span'),
+            3, ''
+          );
+          statsObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    if (statsBar) statsObs.observe(statsBar);
+  </script>
+</body>
+</html>
