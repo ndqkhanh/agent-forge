@@ -111,7 +111,7 @@
 <tr>
 <td class="success">discoverAgents returns all registered cards when no filter</td>
 <td class="success">discoverAllCards()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -129,7 +129,7 @@
 <tr>
 <td class="success">multiple agents with same capability are all discoverable</td>
 <td class="success">multipleAgentsDiscoverable()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -137,52 +137,52 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>08:31:25.728 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
-08:31:25.730 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
-08:31:25.730 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
-08:31:25.730 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
-08:31:25.756 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
-08:31:25.756 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
-08:31:25.756 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
-08:31:25.756 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
-08:31:25.757 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
-08:31:25.757 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
-08:31:25.757 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
-08:31:25.757 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
-08:31:25.763 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-eeaccf8f completed by agent summarizer in 1ms
-08:31:25.763 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: summarizer-1 → a2a-eeaccf8f
-08:31:25.765 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
-08:31:25.765 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
-08:31:25.765 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
-08:31:25.766 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
-08:31:25.766 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-5712716b completed by agent summarizer in 0ms
-08:31:25.766 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: summarizer-1 → a2a-5712716b
-08:31:25.769 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-b2712cee completed by agent classifier in 2ms
-08:31:25.769 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: classifier-1 → a2a-b2712cee
-08:31:25.771 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
-08:31:25.771 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
-08:31:25.771 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
-08:31:25.771 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
-08:31:25.772 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
-08:31:25.772 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
-08:31:25.772 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
-08:31:25.772 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
-08:31:25.772 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-7b8e771a completed by agent classifier in 0ms
-08:31:25.773 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: classifier-1 → a2a-7b8e771a
-08:31:25.773 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
-08:31:25.773 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
-08:31:25.774 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
-08:31:25.774 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
-08:31:25.774 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-2 (capabilities: [summarization])
-08:31:25.775 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
-08:31:25.775 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
-08:31:25.775 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
-08:31:25.775 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
-08:31:25.776 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
-08:31:25.776 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
-08:31:25.776 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
-08:31:25.776 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
-08:31:25.776 [] WARN agentforge.agent.A2AClient -- A2A delegation failed: agent nonexistent not found
+<pre>09:05:05.221 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+09:05:05.223 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+09:05:05.224 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+09:05:05.224 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+09:05:05.251 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+09:05:05.251 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+09:05:05.251 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+09:05:05.251 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+09:05:05.252 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+09:05:05.252 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+09:05:05.252 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+09:05:05.252 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+09:05:05.257 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-dde1bfd9 completed by agent summarizer in 1ms
+09:05:05.258 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: summarizer-1 → a2a-dde1bfd9
+09:05:05.260 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+09:05:05.260 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+09:05:05.260 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+09:05:05.260 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+09:05:05.260 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-bc639ff8 completed by agent summarizer in 0ms
+09:05:05.260 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: summarizer-1 → a2a-bc639ff8
+09:05:05.263 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-357f5b77 completed by agent classifier in 2ms
+09:05:05.263 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: classifier-1 → a2a-357f5b77
+09:05:05.265 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+09:05:05.265 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+09:05:05.265 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+09:05:05.265 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+09:05:05.266 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+09:05:05.266 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+09:05:05.266 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+09:05:05.266 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+09:05:05.267 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-2ebd7e56 completed by agent classifier in 0ms
+09:05:05.267 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: classifier-1 → a2a-2ebd7e56
+09:05:05.268 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+09:05:05.268 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+09:05:05.268 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+09:05:05.268 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+09:05:05.268 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-2 (capabilities: [summarization])
+09:05:05.269 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+09:05:05.270 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+09:05:05.270 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+09:05:05.270 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+09:05:05.270 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+09:05:05.270 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+09:05:05.270 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+09:05:05.270 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+09:05:05.271 [] WARN agentforge.agent.A2AClient -- A2A delegation failed: agent nonexistent not found
 </pre>
 </span>
 </div>
@@ -194,7 +194,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.10.2</a> at Mar 28, 2026, 8:31:25 AM</p>
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at Mar 28, 2026, 9:05:05 AM</p>
 </div>
 </div>
 </body>

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="agentforge.orchestrator.RollbackCoordinatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-03-28T01:31:27" hostname="MacBook-Pro-cua-Khanh.local" time="0.003">
+<testsuite name="agentforge.orchestrator.RollbackCoordinatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-03-28T02:05:06" hostname="MacBook-Pro-cua-Khanh.local" time="0.004">
   <properties/>
-  <testcase name="rollbackCount tracks total rollbacks performed" classname="agentforge.orchestrator.RollbackCoordinatorTest" time="0.0"/>
-  <testcase name="cascading rollback restores earliest checkpoint and cleans later ones" classname="agentforge.orchestrator.RollbackCoordinatorTest" time="0.001"/>
+  <testcase name="rollbackCount tracks total rollbacks performed" classname="agentforge.orchestrator.RollbackCoordinatorTest" time="0.001"/>
+  <testcase name="cascading rollback restores earliest checkpoint and cleans later ones" classname="agentforge.orchestrator.RollbackCoordinatorTest" time="0.0"/>
   <testcase name="rollback deletes the checkpoint after restoring" classname="agentforge.orchestrator.RollbackCoordinatorTest" time="0.0"/>
   <testcase name="rollback with invalid checkpoint throws" classname="agentforge.orchestrator.RollbackCoordinatorTest" time="0.001"/>
-  <testcase name="rollback restores state from checkpoint" classname="agentforge.orchestrator.RollbackCoordinatorTest" time="0.0"/>
-  <system-out><![CDATA[08:31:27.653 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-1 for workflow wf-1 (0 task results)
-08:31:27.653 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-2 for workflow wf-1 (0 task results)
-08:31:27.653 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Deleted checkpoint cp-1
-08:31:27.653 [Test worker] INFO agentforge.orchestrator.RollbackCoordinator -- Rolled back to checkpoint cp-1 for workflow wf-1 (0 task results restored)
-08:31:27.653 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Deleted checkpoint cp-2
-08:31:27.653 [Test worker] INFO agentforge.orchestrator.RollbackCoordinator -- Rolled back to checkpoint cp-2 for workflow wf-1 (0 task results restored)
-08:31:27.654 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-1 for workflow wf-1 (1 task results)
-08:31:27.654 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-2 for workflow wf-1 (2 task results)
-08:31:27.654 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Deleted checkpoint cp-1
-08:31:27.654 [Test worker] INFO agentforge.orchestrator.RollbackCoordinator -- Rolled back to checkpoint cp-1 for workflow wf-1 (1 task results restored)
-08:31:27.655 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-1 for workflow wf-1 (0 task results)
-08:31:27.655 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Deleted checkpoint cp-1
-08:31:27.655 [Test worker] INFO agentforge.orchestrator.RollbackCoordinator -- Rolled back to checkpoint cp-1 for workflow wf-1 (0 task results restored)
-08:31:27.656 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-1 for workflow wf-1 (1 task results)
-08:31:27.656 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Deleted checkpoint cp-1
-08:31:27.656 [Test worker] INFO agentforge.orchestrator.RollbackCoordinator -- Rolled back to checkpoint cp-1 for workflow wf-1 (1 task results restored)
+  <testcase name="rollback restores state from checkpoint" classname="agentforge.orchestrator.RollbackCoordinatorTest" time="0.001"/>
+  <system-out><![CDATA[09:05:06.405 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-1 for workflow wf-1 (0 task results)
+09:05:06.405 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-2 for workflow wf-1 (0 task results)
+09:05:06.405 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Deleted checkpoint cp-1
+09:05:06.405 [Test worker] INFO agentforge.orchestrator.RollbackCoordinator -- Rolled back to checkpoint cp-1 for workflow wf-1 (0 task results restored)
+09:05:06.405 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Deleted checkpoint cp-2
+09:05:06.405 [Test worker] INFO agentforge.orchestrator.RollbackCoordinator -- Rolled back to checkpoint cp-2 for workflow wf-1 (0 task results restored)
+09:05:06.406 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-1 for workflow wf-1 (1 task results)
+09:05:06.406 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-2 for workflow wf-1 (2 task results)
+09:05:06.406 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Deleted checkpoint cp-1
+09:05:06.406 [Test worker] INFO agentforge.orchestrator.RollbackCoordinator -- Rolled back to checkpoint cp-1 for workflow wf-1 (1 task results restored)
+09:05:06.406 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-1 for workflow wf-1 (0 task results)
+09:05:06.406 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Deleted checkpoint cp-1
+09:05:06.406 [Test worker] INFO agentforge.orchestrator.RollbackCoordinator -- Rolled back to checkpoint cp-1 for workflow wf-1 (0 task results restored)
+09:05:06.408 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Saved checkpoint cp-1 for workflow wf-1 (1 task results)
+09:05:06.408 [Test worker] INFO agentforge.orchestrator.CheckpointManager -- Deleted checkpoint cp-1
+09:05:06.408 [Test worker] INFO agentforge.orchestrator.RollbackCoordinator -- Rolled back to checkpoint cp-1 for workflow wf-1 (1 task results restored)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

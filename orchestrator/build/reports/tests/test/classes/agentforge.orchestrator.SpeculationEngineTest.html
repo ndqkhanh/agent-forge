@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.005s</div>
+<div class="counter">0.003s</div>
 <p>duration</p>
 </div>
 </td>
@@ -111,13 +111,13 @@
 <tr>
 <td class="success">speculate returns predicted output when confidence above threshold</td>
 <td class="success">speculateReturnsWhenConfident()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">speculation respects max depth limit</td>
 <td class="success">speculationRespectsMaxDepth()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -143,180 +143,180 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
-08:31:27.674 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.674 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: NEGATIVE (total: 21)
-08:31:27.674 [Test worker] WARN agentforge.orchestrator.SpeculationEngine -- Speculation MISS for task classify: predicted=POSITIVE actual=NEGATIVE
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.SpeculationEngine -- Effective confidence {:.3f} (raw={:.3f}, decay^0.3={:.3f}) below threshold {:.3f} for task 0.3
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
-08:31:27.675 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 21)
-08:31:27.675 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
-08:31:27.675 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 22)
-08:31:27.675 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
-08:31:27.675 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 23)
-08:31:27.675 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
-08:31:27.675 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.675 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: NEGATIVE (total: 24)
-08:31:27.675 [Test worker] WARN agentforge.orchestrator.SpeculationEngine -- Speculation MISS for task classify: predicted=POSITIVE actual=NEGATIVE
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
-08:31:27.676 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
-08:31:27.676 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
-08:31:27.677 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.677 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 2): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.677 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 21)
-08:31:27.677 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
-08:31:27.678 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 21)
-08:31:27.678 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
-08:31:27.678 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
-08:31:27.679 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.679 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 2): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.679 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 3): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.SpeculationEngine -- Speculation depth limit reached (3/3), skipping classify
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
-08:31:27.679 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 21)
-08:31:27.679 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
-08:31:27.679 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
-08:31:27.679 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: NEGATIVE (total: 22)
-08:31:27.679 [Test worker] WARN agentforge.orchestrator.SpeculationEngine -- Speculation MISS for task classify: predicted=POSITIVE actual=NEGATIVE
+<pre>09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
+09:05:06.426 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
+09:05:06.427 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.427 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: NEGATIVE (total: 21)
+09:05:06.427 [Test worker] WARN agentforge.orchestrator.SpeculationEngine -- Speculation MISS for task classify: predicted=POSITIVE actual=NEGATIVE
+09:05:06.427 [Test worker] DEBUG agentforge.orchestrator.SpeculationEngine -- Effective confidence {:.3f} (raw={:.3f}, decay^0.3={:.3f}) below threshold {:.3f} for task 0.3
+09:05:06.427 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
+09:05:06.427 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
+09:05:06.427 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
+09:05:06.428 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 21)
+09:05:06.428 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
+09:05:06.428 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 22)
+09:05:06.428 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
+09:05:06.428 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 23)
+09:05:06.428 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
+09:05:06.428 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: NEGATIVE (total: 24)
+09:05:06.428 [Test worker] WARN agentforge.orchestrator.SpeculationEngine -- Speculation MISS for task classify: predicted=POSITIVE actual=NEGATIVE
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
+09:05:06.428 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
+09:05:06.429 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
+09:05:06.429 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.429 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 2): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.429 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 21)
+09:05:06.429 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
+09:05:06.430 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.430 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 21)
+09:05:06.430 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
+09:05:06.431 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.431 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 2): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.431 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 3): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.SpeculationEngine -- Speculation depth limit reached (3/3), skipping classify
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
+09:05:06.431 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 21)
+09:05:06.431 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
+09:05:06.431 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+09:05:06.431 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: NEGATIVE (total: 22)
+09:05:06.431 [Test worker] WARN agentforge.orchestrator.SpeculationEngine -- Speculation MISS for task classify: predicted=POSITIVE actual=NEGATIVE
 </pre>
 </span>
 </div>
@@ -328,7 +328,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.10.2</a> at Mar 28, 2026, 8:31:28 AM</p>
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at Mar 28, 2026, 9:05:06 AM</p>
 </div>
 </div>
 </body>

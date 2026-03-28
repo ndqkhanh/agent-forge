@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.006s</div>
+<div class="counter">0.005s</div>
 <p>duration</p>
 </div>
 </td>
@@ -87,7 +87,7 @@
 <tr>
 <td class="success">discoverTools returns all available tools</td>
 <td class="success">discoverToolsReturnsAll()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -105,25 +105,25 @@
 <tr>
 <td class="success">invokeTool routes to correct server</td>
 <td class="success">invokeToolRoutesToCorrectServer()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">invokeTool with unknown tool returns error</td>
 <td class="success">invokeUnknownToolReturnsError()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">tools from multiple servers are all discoverable</td>
 <td class="success">multipleServersDiscoverable()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">serverCount returns number of registered servers</td>
 <td class="success">serverCountReturnsRegistered()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -137,24 +137,24 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>08:31:25.889 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
-08:31:25.889 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
-08:31:25.889 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
-08:31:25.890 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
-08:31:25.890 [] ERROR agentforge.agent.MCPClient -- Tool web_search invocation failed: Server crashed
-08:31:25.891 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
-08:31:25.891 [] WARN agentforge.agent.MCPClient -- Tool not found: nonexistent
-08:31:25.891 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
-08:31:25.892 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'code' with 1 tools
-08:31:25.892 [] DEBUG agentforge.agent.MCPClient -- Tool code_execute invoked: success=true
-08:31:25.892 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
-08:31:25.892 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'code' with 1 tools
-08:31:25.893 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
-08:31:25.893 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
-08:31:25.893 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
-08:31:25.894 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
-08:31:25.895 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
-08:31:25.895 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'another' with 0 tools
+<pre>09:05:05.383 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
+09:05:05.383 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
+09:05:05.383 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
+09:05:05.384 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
+09:05:05.384 [] ERROR agentforge.agent.MCPClient -- Tool web_search invocation failed: Server crashed
+09:05:05.385 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
+09:05:05.385 [] WARN agentforge.agent.MCPClient -- Tool not found: nonexistent
+09:05:05.386 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
+09:05:05.386 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'code' with 1 tools
+09:05:05.386 [] DEBUG agentforge.agent.MCPClient -- Tool code_execute invoked: success=true
+09:05:05.386 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
+09:05:05.386 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'code' with 1 tools
+09:05:05.387 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
+09:05:05.388 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
+09:05:05.388 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
+09:05:05.388 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
+09:05:05.389 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 2 tools
+09:05:05.389 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'another' with 0 tools
 </pre>
 </span>
 </div>
@@ -166,7 +166,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.10.2</a> at Mar 28, 2026, 8:31:25 AM</p>
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at Mar 28, 2026, 9:05:05 AM</p>
 </div>
 </div>
 </body>

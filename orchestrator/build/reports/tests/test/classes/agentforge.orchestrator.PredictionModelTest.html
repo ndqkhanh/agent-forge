@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.005s</div>
+<div class="counter">0.006s</div>
 <p>duration</p>
 </div>
 </td>
@@ -87,7 +87,7 @@
 <tr>
 <td class="success">predict returns a prediction with confidence score</td>
 <td class="success">predictReturnsPredictionWithConfidence()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -99,13 +99,13 @@
 <tr>
 <td class="success">recordedOutcomeCount tracks total outcomes</td>
 <td class="success">recordedOutcomeCountTracksTotal()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">recording outcomes increases confidence for seen task patterns</td>
 <td class="success">recordingOutcomesIncreasesConfidence()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -131,48 +131,48 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>08:31:27.646 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 1)
-08:31:27.646 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 2)
-08:31:27.646 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 3)
-08:31:27.646 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 4)
-08:31:27.646 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 5)
-08:31:27.646 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 6)
-08:31:27.646 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 7)
-08:31:27.646 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 8)
-08:31:27.646 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: NEGATIVE (total: 9)
-08:31:27.646 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: NEGATIVE (total: 10)
-08:31:27.649 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 1)
-08:31:27.649 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 2)
-08:31:27.649 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 3)
-08:31:27.649 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 4)
-08:31:27.649 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 5)
-08:31:27.649 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 6)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 7)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 8)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 9)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 10)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 11)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 12)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 13)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 14)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 15)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 16)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 17)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 18)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 19)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 20)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 1)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 2)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 3)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 4)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 5)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 6)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 7)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 8)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 9)
-08:31:27.650 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 10)
-08:31:27.651 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for a: out (total: 1)
-08:31:27.651 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for b: out (total: 2)
+<pre>09:05:06.397 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 1)
+09:05:06.397 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 2)
+09:05:06.397 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 3)
+09:05:06.397 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 4)
+09:05:06.397 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 5)
+09:05:06.397 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 6)
+09:05:06.397 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 7)
+09:05:06.397 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: POSITIVE (total: 8)
+09:05:06.397 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: NEGATIVE (total: 9)
+09:05:06.397 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for sentiment: NEGATIVE (total: 10)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 1)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 2)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 3)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 4)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 5)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 6)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 7)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 8)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 9)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 10)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 11)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 12)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 13)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 14)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 15)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 16)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 17)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 18)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 19)
+09:05:06.401 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: LABEL_A (total: 20)
+09:05:06.402 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 1)
+09:05:06.402 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 2)
+09:05:06.402 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 3)
+09:05:06.402 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 4)
+09:05:06.402 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 5)
+09:05:06.402 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 6)
+09:05:06.402 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 7)
+09:05:06.402 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 8)
+09:05:06.402 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 9)
+09:05:06.403 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classifier: POSITIVE (total: 10)
+09:05:06.403 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for a: out (total: 1)
+09:05:06.403 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for b: out (total: 2)
 </pre>
 </span>
 </div>
@@ -184,7 +184,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.10.2</a> at Mar 28, 2026, 8:31:28 AM</p>
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at Mar 28, 2026, 9:05:06 AM</p>
 </div>
 </div>
 </body>

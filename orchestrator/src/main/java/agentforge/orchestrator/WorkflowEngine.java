@@ -1,7 +1,6 @@
 package agentforge.orchestrator;
 
 import agentforge.common.model.*;
-import agentforge.common.model.TaskExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

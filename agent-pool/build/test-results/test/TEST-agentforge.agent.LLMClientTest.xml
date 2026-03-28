@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="agentforge.agent.LLMClientTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-03-28T01:31:25" hostname="MacBook-Pro-cua-Khanh.local" time="0.085">
+<testsuite name="agentforge.agent.LLMClientTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-03-28T02:05:05" hostname="MacBook-Pro-cua-Khanh.local" time="0.087">
   <properties/>
   <testcase name="tracks total tokens used" classname="agentforge.agent.LLMClientTest" time="0.001"/>
   <testcase name="complete sends request and returns response text" classname="agentforge.agent.LLMClientTest" time="0.0"/>
-  <testcase name="exhausts retries and returns error" classname="agentforge.agent.LLMClientTest" time="0.038"/>
+  <testcase name="exhausts retries and returns error" classname="agentforge.agent.LLMClientTest" time="0.041"/>
   <testcase name="complete with system prompt includes it in request" classname="agentforge.agent.LLMClientTest" time="0.001"/>
-  <testcase name="handles null response gracefully" classname="agentforge.agent.LLMClientTest" time="0.001"/>
+  <testcase name="handles null response gracefully" classname="agentforge.agent.LLMClientTest" time="0.0"/>
   <testcase name="request includes model and temperature from config" classname="agentforge.agent.LLMClientTest" time="0.001"/>
   <testcase name="streamComplete returns tokens via callback" classname="agentforge.agent.LLMClientTest" time="0.001"/>
   <testcase name="retries on transient failure and succeeds" classname="agentforge.agent.LLMClientTest" time="0.038"/>
-  <testcase name="config defaults are reasonable" classname="agentforge.agent.LLMClientTest" time="0.002"/>
-  <system-out><![CDATA[08:31:25.805 [] WARN agentforge.agent.LLMClient -- LLM request failed (attempt 1/3): Always fails
-08:31:25.818 [] WARN agentforge.agent.LLMClient -- LLM request failed (attempt 2/3): Always fails
-08:31:25.840 [] WARN agentforge.agent.LLMClient -- LLM request failed (attempt 3/3): Always fails
-08:31:25.848 [] WARN agentforge.agent.LLMClient -- LLM request failed (attempt 1/4): Server error 500
-08:31:25.860 [] WARN agentforge.agent.LLMClient -- LLM request failed (attempt 2/4): Server error 500
+  <testcase name="config defaults are reasonable" classname="agentforge.agent.LLMClientTest" time="0.003"/>
+  <system-out><![CDATA[09:05:05.297 [] WARN agentforge.agent.LLMClient -- LLM request failed (attempt 1/3): Always fails
+09:05:05.310 [] WARN agentforge.agent.LLMClient -- LLM request failed (attempt 2/3): Always fails
+09:05:05.335 [] WARN agentforge.agent.LLMClient -- LLM request failed (attempt 3/3): Always fails
+09:05:05.342 [] WARN agentforge.agent.LLMClient -- LLM request failed (attempt 1/4): Server error 500
+09:05:05.354 [] WARN agentforge.agent.LLMClient -- LLM request failed (attempt 2/4): Server error 500
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
