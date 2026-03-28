@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - EndToEndAcceptanceTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>EndToEndAcceptanceTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/agentforge.gateway.html">agentforge.gateway</a> &gt; EndToEndAcceptanceTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">6</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.195s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">agent delegates classification to another agent via A2A</td>
+<td class="success">a2aDelegation()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">diamond workflow: classify → [summarize, classify] → final summarize</td>
+<td class="success">diamondWorkflow()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">HITL gate blocks workflow until approved</td>
+<td class="success">hitlGateBlocksUntilApproved()</td>
+<td class="success">0.108s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">MCP tool invoked during workflow execution</td>
+<td class="success">mcpToolInvocation()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">speculation hits on a well-trained predictable workflow</td>
+<td class="success">speculationHitsOnPredictableWorkflow()</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">end-to-end: submit → execute → completed with task results</td>
+<td class="success">submitExecuteComplete()</td>
+<td class="success">0.071s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>08:31:26.915 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:26.917 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:26.917 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization])
+08:31:26.917 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification])
+08:31:26.918 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:26.926 [Test worker] INFO agentforge.gateway.GatewayRouter -- Workflow submitted: ecbc0281-23da-4366-b74f-278781c6cf67 (e2e-pipeline)
+08:31:26.948 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task classify completed by agent classifier in 0ms
+08:31:26.950 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task summarize completed by agent summarizer in 1ms
+08:31:26.951 [] INFO agentforge.gateway.GatewayRouter -- Workflow completed: ecbc0281-23da-4366-b74f-278781c6cf67 (2 tasks)
+08:31:26.959 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:26.959 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:26.959 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization])
+08:31:26.959 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification])
+08:31:26.959 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:26.960 [Test worker] INFO agentforge.gateway.GatewayRouter -- Workflow submitted: 5a4e0ae4-3586-4f23-8351-7f9108107e06 (diamond)
+08:31:26.960 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task step1 completed by agent classifier in 0ms
+08:31:26.960 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task step2a completed by agent summarizer in 0ms
+08:31:26.962 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task step2b completed by agent classifier in 2ms
+08:31:26.963 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task step3 completed by agent summarizer in 0ms
+08:31:26.963 [] INFO agentforge.gateway.GatewayRouter -- Workflow completed: 5a4e0ae4-3586-4f23-8351-7f9108107e06 (4 tasks)
+08:31:26.965 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:26.965 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:26.965 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization])
+08:31:26.965 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification])
+08:31:26.965 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:26.966 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 1)
+08:31:26.966 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 2)
+08:31:26.966 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 3)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 4)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 5)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 6)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 7)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 8)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 9)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 10)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 11)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 12)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 13)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 14)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 15)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 16)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 17)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 18)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 19)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 20)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 21)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 22)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 23)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 24)
+08:31:26.967 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 25)
+08:31:26.968 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 26)
+08:31:26.968 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 27)
+08:31:26.968 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 28)
+08:31:26.968 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 29)
+08:31:26.968 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 30)
+08:31:26.969 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculating on task classify (depth 1): predicted='POSITIVE' effective_confidence={:.3f}
+08:31:26.970 [Test worker] DEBUG agentforge.orchestrator.PredictionModel -- Recorded outcome for classify: POSITIVE (total: 31)
+08:31:26.970 [Test worker] INFO agentforge.orchestrator.SpeculationEngine -- Speculation HIT for task classify: predicted=POSITIVE
+08:31:26.971 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:26.972 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:26.972 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization])
+08:31:26.972 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification])
+08:31:26.972 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:26.973 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-0a365d15 completed by agent classifier in 0ms
+08:31:26.973 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: classifier-1 → a2a-0a365d15
+08:31:26.975 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:26.975 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:26.975 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization])
+08:31:26.975 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification])
+08:31:26.975 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:26.976 [Test worker] INFO agentforge.orchestrator.HITLGateManager -- HITL gate created: gate-1 for workflow wf-1 task review — 'Editorial review'
+08:31:27.082 [ForkJoinPool.commonPool-worker-1] INFO agentforge.orchestrator.HITLGateManager -- HITL gate APPROVED: gate-1 by editor-1 — 'Approved'
+08:31:27.084 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:27.084 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:27.084 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization])
+08:31:27.084 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification])
+08:31:27.084 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:27.085 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at Mar 28, 2026, 8:31:27 AM</p>
+</div>
+</div>
+</body>
+</html>

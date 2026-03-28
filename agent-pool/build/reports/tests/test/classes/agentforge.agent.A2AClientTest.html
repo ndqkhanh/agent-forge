@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - A2AClientTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>A2AClientTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/agentforge.agent.html">agentforge.agent</a> &gt; A2AClientTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">9</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.077s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">completed delegations are tracked</td>
+<td class="success">completedDelegationsTracked()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">delegateByCapability finds and delegates to matching agent</td>
+<td class="success">delegateByCapability()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">delegateByCapability with no matching agent returns failure</td>
+<td class="success">delegateByCapabilityNoMatch()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">delegate sends task to agent and returns result</td>
+<td class="success">delegateReturnsResult()</td>
+<td class="success">0.008s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">delegate to unknown agent returns failure</td>
+<td class="success">delegateUnknownAgentFails()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">discoverAgents returns all registered cards when no filter</td>
+<td class="success">discoverAllCards()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">discoverAgents returns agents with matching capability</td>
+<td class="success">discoverByCapability()</td>
+<td class="success">0.058s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">discoverAgents returns empty for unknown capability</td>
+<td class="success">discoverUnknownCapability()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">multiple agents with same capability are all discoverable</td>
+<td class="success">multipleAgentsDiscoverable()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>08:31:25.728 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.730 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:25.730 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+08:31:25.730 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+08:31:25.756 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.756 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:25.756 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+08:31:25.756 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+08:31:25.757 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.757 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:25.757 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+08:31:25.757 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+08:31:25.763 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-eeaccf8f completed by agent summarizer in 1ms
+08:31:25.763 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: summarizer-1 → a2a-eeaccf8f
+08:31:25.765 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.765 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:25.765 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+08:31:25.766 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+08:31:25.766 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-5712716b completed by agent summarizer in 0ms
+08:31:25.766 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: summarizer-1 → a2a-5712716b
+08:31:25.769 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-b2712cee completed by agent classifier in 2ms
+08:31:25.769 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: classifier-1 → a2a-b2712cee
+08:31:25.771 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.771 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:25.771 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+08:31:25.771 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+08:31:25.772 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.772 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:25.772 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+08:31:25.772 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+08:31:25.772 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task a2a-7b8e771a completed by agent classifier in 0ms
+08:31:25.773 [] INFO agentforge.agent.A2AClient -- A2A delegation succeeded: classifier-1 → a2a-7b8e771a
+08:31:25.773 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.773 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:25.774 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+08:31:25.774 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+08:31:25.774 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-2 (capabilities: [summarization])
+08:31:25.775 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.775 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:25.775 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+08:31:25.775 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+08:31:25.776 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.776 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:25.776 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: summarizer-1 (capabilities: [summarization, text-processing])
+08:31:25.776 [Test worker] INFO agentforge.agent.A2AClient -- Registered A2A agent card: classifier-1 (capabilities: [classification, sentiment-analysis])
+08:31:25.776 [] WARN agentforge.agent.A2AClient -- A2A delegation failed: agent nonexistent not found
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at Mar 28, 2026, 8:31:25 AM</p>
+</div>
+</div>
+</body>
+</html>

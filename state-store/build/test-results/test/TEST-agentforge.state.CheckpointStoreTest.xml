@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agentforge.state.CheckpointStoreTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-03-28T01:31:28" hostname="MacBook-Pro-cua-Khanh.local" time="0.066">
+  <properties/>
+  <testcase name="count tracks active checkpoints" classname="agentforge.state.CheckpointStoreTest" time="0.053"/>
+  <testcase name="expired checkpoints are not returned" classname="agentforge.state.CheckpointStoreTest" time="0.001"/>
+  <testcase name="load nonexistent returns empty" classname="agentforge.state.CheckpointStoreTest" time="0.001"/>
+  <testcase name="delete removes checkpoint" classname="agentforge.state.CheckpointStoreTest" time="0.001"/>
+  <testcase name="compareAndSwap fails with stale version" classname="agentforge.state.CheckpointStoreTest" time="0.003"/>
+  <testcase name="compareAndSwap succeeds with correct version" classname="agentforge.state.CheckpointStoreTest" time="0.001"/>
+  <testcase name="listByWorkflow returns only checkpoints for that workflow" classname="agentforge.state.CheckpointStoreTest" time="0.003"/>
+  <testcase name="save and load round-trips correctly" classname="agentforge.state.CheckpointStoreTest" time="0.001"/>
+  <system-out><![CDATA[08:31:28.561 [Test worker] DEBUG agentforge.state.InMemoryCheckpointStore -- Saved checkpoint scp-1 for workflow wf-1 (ttl=-1ms)
+08:31:28.563 [Test worker] DEBUG agentforge.state.InMemoryCheckpointStore -- Saved checkpoint scp-2 for workflow wf-2 (ttl=-1ms)
+08:31:28.567 [Test worker] DEBUG agentforge.state.InMemoryCheckpointStore -- Saved checkpoint scp-1 for workflow wf-1 (ttl=0ms)
+08:31:28.570 [Test worker] DEBUG agentforge.state.InMemoryCheckpointStore -- Saved checkpoint scp-1 for workflow wf-1 (ttl=-1ms)
+08:31:28.570 [Test worker] DEBUG agentforge.state.InMemoryCheckpointStore -- Saved checkpoint scp-1 for workflow wf-1 (ttl=-1ms)
+08:31:28.573 [Test worker] DEBUG agentforge.state.InMemoryCheckpointStore -- Saved checkpoint scp-1 for workflow wf-1 (ttl=-1ms)
+08:31:28.574 [Test worker] DEBUG agentforge.state.InMemoryCheckpointStore -- Saved checkpoint scp-1 for workflow wf-1 (ttl=-1ms)
+08:31:28.574 [Test worker] DEBUG agentforge.state.InMemoryCheckpointStore -- Saved checkpoint scp-2 for workflow wf-1 (ttl=-1ms)
+08:31:28.575 [Test worker] DEBUG agentforge.state.InMemoryCheckpointStore -- Saved checkpoint scp-3 for workflow wf-2 (ttl=-1ms)
+08:31:28.578 [Test worker] DEBUG agentforge.state.InMemoryCheckpointStore -- Saved checkpoint scp-1 for workflow wf-1 (ttl=-1ms)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

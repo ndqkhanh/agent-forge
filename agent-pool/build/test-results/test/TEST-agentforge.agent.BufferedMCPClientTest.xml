@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agentforge.agent.BufferedMCPClientTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-03-28T01:31:25" hostname="MacBook-Pro-cua-Khanh.local" time="0.009">
+  <properties/>
+  <testcase name="rollback discards buffer without executing" classname="agentforge.agent.BufferedMCPClientTest" time="0.002"/>
+  <testcase name="independent speculation contexts don't interfere" classname="agentforge.agent.BufferedMCPClientTest" time="0.001"/>
+  <testcase name="commit flushes buffer and executes all buffered calls" classname="agentforge.agent.BufferedMCPClientTest" time="0.002"/>
+  <testcase name="isSpeculating returns correct state" classname="agentforge.agent.BufferedMCPClientTest" time="0.001"/>
+  <testcase name="multiple buffered calls accumulate in buffer" classname="agentforge.agent.BufferedMCPClientTest" time="0.0"/>
+  <testcase name="speculative invocation buffers call without executing" classname="agentforge.agent.BufferedMCPClientTest" time="0.001"/>
+  <testcase name="non-speculative invocation passes through to real client" classname="agentforge.agent.BufferedMCPClientTest" time="0.001"/>
+  <system-out><![CDATA[08:31:25.793 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:25.793 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Began speculation buffer: spec-1
+08:31:25.794 [Test worker] DEBUG agentforge.agent.BufferedMCPClient -- Buffered tool call: web_search (speculation: spec-1)
+08:31:25.794 [Test worker] DEBUG agentforge.agent.BufferedMCPClient -- Buffered tool call: web_search (speculation: spec-1)
+08:31:25.794 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Rolled back speculation spec-1: discarded 2 buffered calls
+08:31:25.795 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:25.795 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Began speculation buffer: spec-1
+08:31:25.795 [Test worker] DEBUG agentforge.agent.BufferedMCPClient -- Buffered tool call: web_search (speculation: spec-1)
+08:31:25.795 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Began speculation buffer: spec-2
+08:31:25.795 [Test worker] DEBUG agentforge.agent.BufferedMCPClient -- Buffered tool call: web_search (speculation: spec-2)
+08:31:25.795 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Committing speculation spec-1: flushing 1 buffered calls
+08:31:25.796 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
+08:31:25.796 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Rolled back speculation spec-2: discarded 1 buffered calls
+08:31:25.796 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:25.797 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Began speculation buffer: spec-1
+08:31:25.797 [Test worker] DEBUG agentforge.agent.BufferedMCPClient -- Buffered tool call: web_search (speculation: spec-1)
+08:31:25.797 [Test worker] DEBUG agentforge.agent.BufferedMCPClient -- Buffered tool call: web_search (speculation: spec-1)
+08:31:25.797 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Committing speculation spec-1: flushing 2 buffered calls
+08:31:25.797 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
+08:31:25.797 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
+08:31:25.799 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:25.799 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Began speculation buffer: spec-1
+08:31:25.800 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:25.800 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Began speculation buffer: spec-1
+08:31:25.800 [Test worker] DEBUG agentforge.agent.BufferedMCPClient -- Buffered tool call: web_search (speculation: spec-1)
+08:31:25.800 [Test worker] DEBUG agentforge.agent.BufferedMCPClient -- Buffered tool call: web_search (speculation: spec-1)
+08:31:25.800 [Test worker] DEBUG agentforge.agent.BufferedMCPClient -- Buffered tool call: web_search (speculation: spec-1)
+08:31:25.800 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:25.801 [Test worker] INFO agentforge.agent.BufferedMCPClient -- Began speculation buffer: spec-1
+08:31:25.801 [Test worker] DEBUG agentforge.agent.BufferedMCPClient -- Buffered tool call: web_search (speculation: spec-1)
+08:31:25.801 [Test worker] INFO agentforge.agent.MCPClient -- Added MCP server 'default' with 1 tools
+08:31:25.801 [] DEBUG agentforge.agent.MCPClient -- Tool web_search invoked: success=true
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agentforge.events.ExactlyOnceEventTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-03-28T01:31:26" hostname="MacBook-Pro-cua-Khanh.local" time="0.072">
+  <properties/>
+  <testcase name="producer tracks total committed events" classname="agentforge.events.ExactlyOnceEventTest" time="0.053"/>
+  <testcase name="consumer tracks offset and doesn't re-read committed events" classname="agentforge.events.ExactlyOnceEventTest" time="0.006"/>
+  <testcase name="cannot commit without active transaction" classname="agentforge.events.ExactlyOnceEventTest" time="0.002"/>
+  <testcase name="committed transaction events are visible to consumer" classname="agentforge.events.ExactlyOnceEventTest" time="0.002"/>
+  <testcase name="duplicate event IDs within transaction are deduplicated" classname="agentforge.events.ExactlyOnceEventTest" time="0.001"/>
+  <testcase name="events on different topics are isolated" classname="agentforge.events.ExactlyOnceEventTest" time="0.001"/>
+  <testcase name="initTransactions must be called before beginTransaction" classname="agentforge.events.ExactlyOnceEventTest" time="0.001"/>
+  <testcase name="aborted transaction events are NOT visible to consumer" classname="agentforge.events.ExactlyOnceEventTest" time="0.001"/>
+  <testcase name="events sent outside transaction are immediately visible" classname="agentforge.events.ExactlyOnceEventTest" time="0.001"/>
+  <testcase name="cannot begin nested transactions" classname="agentforge.events.ExactlyOnceEventTest" time="0.001"/>
+  <system-out><![CDATA[08:31:26.356 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 initialized transactions
+08:31:26.357 [Test worker] DEBUG agentforge.events.EventProducer -- Producer producer-1 began transaction
+08:31:26.359 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 committed transaction (2 events)
+08:31:26.376 [Test worker] DEBUG agentforge.events.EventProducer -- Producer producer-1 began transaction
+08:31:26.376 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 aborted transaction (1 events discarded)
+08:31:26.380 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 initialized transactions
+08:31:26.380 [Test worker] DEBUG agentforge.events.EventProducer -- Producer producer-1 began transaction
+08:31:26.380 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 committed transaction (1 events)
+08:31:26.381 [Test worker] DEBUG agentforge.events.EventConsumer -- Consumer consumer-group-1 polled 1 events from agentforge.task.dispatched (offset 0→1)
+08:31:26.384 [Test worker] DEBUG agentforge.events.EventConsumer -- Consumer consumer-group-1 committed offset 1 for agentforge.task.dispatched
+08:31:26.384 [Test worker] DEBUG agentforge.events.EventProducer -- Producer producer-1 began transaction
+08:31:26.384 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 committed transaction (1 events)
+08:31:26.384 [Test worker] DEBUG agentforge.events.EventConsumer -- Consumer consumer-group-1 polled 1 events from agentforge.task.dispatched (offset 1→2)
+08:31:26.387 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 initialized transactions
+08:31:26.389 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 initialized transactions
+08:31:26.389 [Test worker] DEBUG agentforge.events.EventProducer -- Producer producer-1 began transaction
+08:31:26.389 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 committed transaction (2 events)
+08:31:26.389 [Test worker] DEBUG agentforge.events.EventConsumer -- Consumer consumer-group-1 polled 2 events from agentforge.task.dispatched (offset 0→2)
+08:31:26.392 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 initialized transactions
+08:31:26.392 [Test worker] DEBUG agentforge.events.EventProducer -- Producer producer-1 began transaction
+08:31:26.392 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 committed transaction (1 events)
+08:31:26.392 [Test worker] DEBUG agentforge.events.EventConsumer -- Consumer consumer-group-1 polled 1 events from agentforge.task.completed (offset 0→1)
+08:31:26.393 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 initialized transactions
+08:31:26.393 [Test worker] DEBUG agentforge.events.EventProducer -- Producer producer-1 began transaction
+08:31:26.393 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 committed transaction (2 events)
+08:31:26.393 [Test worker] DEBUG agentforge.events.EventConsumer -- Consumer consumer-group-1 polled 1 events from agentforge.task.dispatched (offset 0→1)
+08:31:26.393 [Test worker] DEBUG agentforge.events.EventConsumer -- Consumer consumer-group-1 polled 1 events from agentforge.workflow.completed (offset 0→1)
+08:31:26.395 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 initialized transactions
+08:31:26.395 [Test worker] DEBUG agentforge.events.EventProducer -- Producer producer-1 began transaction
+08:31:26.395 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 aborted transaction (1 events discarded)
+08:31:26.396 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 initialized transactions
+08:31:26.396 [Test worker] DEBUG agentforge.events.EventConsumer -- Consumer consumer-group-1 polled 1 events from agentforge.workflow.submitted (offset 0→1)
+08:31:26.397 [Test worker] INFO agentforge.events.EventProducer -- Producer producer-1 initialized transactions
+08:31:26.397 [Test worker] DEBUG agentforge.events.EventProducer -- Producer producer-1 began transaction
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

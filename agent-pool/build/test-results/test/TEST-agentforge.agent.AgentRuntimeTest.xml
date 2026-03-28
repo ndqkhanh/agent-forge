@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agentforge.agent.AgentRuntimeTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-03-28T01:31:25" hostname="MacBook-Pro-cua-Khanh.local" time="0.013">
+  <properties/>
+  <testcase name="executeTask with unknown agent type returns failure" classname="agentforge.agent.AgentRuntimeTest" time="0.001"/>
+  <testcase name="ClassifierAgent handles empty input" classname="agentforge.agent.AgentRuntimeTest" time="0.001"/>
+  <testcase name="asTaskExecutor adapts runtime for WorkflowEngine use" classname="agentforge.agent.AgentRuntimeTest" time="0.001"/>
+  <testcase name="SummarizerAgent produces summary of inputs" classname="agentforge.agent.AgentRuntimeTest" time="0.0"/>
+  <testcase name="executeTask routes to correct agent and returns result" classname="agentforge.agent.AgentRuntimeTest" time="0.005"/>
+  <testcase name="ClassifierAgent classifies input text" classname="agentforge.agent.AgentRuntimeTest" time="0.001"/>
+  <testcase name="registerAgent adds agent to the pool" classname="agentforge.agent.AgentRuntimeTest" time="0.001"/>
+  <testcase name="agentCount returns total registered agents" classname="agentforge.agent.AgentRuntimeTest" time="0.001"/>
+  <testcase name="SummarizerAgent with empty input returns empty summary" classname="agentforge.agent.AgentRuntimeTest" time="0.0"/>
+  <testcase name="registeredAgentTypes returns all registered types" classname="agentforge.agent.AgentRuntimeTest" time="0.0"/>
+  <system-out><![CDATA[08:31:25.780 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.780 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task summarize completed by agent summarizer in 0ms
+08:31:25.781 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.782 [ForkJoinPool.commonPool-worker-1] DEBUG agentforge.agent.AgentRuntime -- Task summarize completed by agent summarizer in 0ms
+08:31:25.788 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.789 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.789 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+08:31:25.791 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: summarizer
+08:31:25.791 [Test worker] INFO agentforge.agent.AgentRuntime -- Registered agent: classifier
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

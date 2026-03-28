@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agentforge.gateway.GatewayRoutesTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-03-28T01:31:27" hostname="MacBook-Pro-cua-Khanh.local" time="0.011">
+  <properties/>
+  <testcase name="cancelWorkflow with unknown ID returns false" classname="agentforge.gateway.GatewayRoutesTest" time="0.001"/>
+  <testcase name="submitWorkflow with cycle is rejected" classname="agentforge.gateway.GatewayRoutesTest" time="0.001"/>
+  <testcase name="getWorkflow with unknown ID returns empty" classname="agentforge.gateway.GatewayRoutesTest" time="0.001"/>
+  <testcase name="getWorkflow returns current status" classname="agentforge.gateway.GatewayRoutesTest" time="0.001"/>
+  <testcase name="cancelWorkflow sets status to CANCELLED" classname="agentforge.gateway.GatewayRoutesTest" time="0.001"/>
+  <testcase name="listWorkflows returns all submitted workflows" classname="agentforge.gateway.GatewayRoutesTest" time="0.004"/>
+  <testcase name="executeWorkflow runs and returns completed results" classname="agentforge.gateway.GatewayRoutesTest" time="0.001"/>
+  <testcase name="submitWorkflow returns accepted response with workflow ID" classname="agentforge.gateway.GatewayRoutesTest" time="0.0"/>
+  <system-out><![CDATA[08:31:27.089 [Test worker] WARN agentforge.gateway.GatewayRouter -- Workflow rejected: cyclic: Workflow DAG contains a cycle
+08:31:27.091 [Test worker] INFO agentforge.gateway.GatewayRouter -- Workflow submitted: 7eefa261-e9f1-43f9-8c2d-abe2eb9bc32f (status-wf)
+08:31:27.092 [Test worker] INFO agentforge.gateway.GatewayRouter -- Workflow submitted: 7f50dcc2-a226-40fa-96be-30b7cd85860a (cancel-wf)
+08:31:27.092 [Test worker] INFO agentforge.gateway.GatewayRouter -- Workflow cancelled: 7f50dcc2-a226-40fa-96be-30b7cd85860a
+08:31:27.093 [Test worker] INFO agentforge.gateway.GatewayRouter -- Workflow submitted: d536c149-84bc-43b3-9bf0-878f4eed0b28 (wf-1)
+08:31:27.093 [Test worker] INFO agentforge.gateway.GatewayRouter -- Workflow submitted: 0d8d7a3f-7df9-4546-bf68-2987701b127e (wf-2)
+08:31:27.096 [Test worker] INFO agentforge.gateway.GatewayRouter -- Workflow submitted: 861527a4-30c2-463d-9432-2ae0220d56bb (exec-wf)
+08:31:27.097 [] INFO agentforge.gateway.GatewayRouter -- Workflow completed: 861527a4-30c2-463d-9432-2ae0220d56bb (2 tasks)
+08:31:27.098 [Test worker] INFO agentforge.gateway.GatewayRouter -- Workflow submitted: aa3f02e6-274a-458f-b515-8c0077a1f358 (test-wf)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
