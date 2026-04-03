@@ -1,8 +1,10 @@
 rootProject.name = "agent-forge"
 
 include("common")
-include("orchestrator")
-include("agent-pool")
+include("api-client")
+include("runtime")
+include("tools")
+include("hooks")
+include("mcp")
+include("config")
 include("gateway")
-include("event-bus")
-include("state-store")

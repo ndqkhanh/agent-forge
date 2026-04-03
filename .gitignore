@@ -20,6 +20,7 @@ Thumbs.db
 *.class
 *.jar
 !gradle/wrapper/gradle-wrapper.jar
+bin/
 
 # Logs
 *.log
