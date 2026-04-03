@@ -244,7 +244,7 @@ Requirements: Docker 24+, Docker Compose v2, `curl`, `jq`.
 
 ```bash
 # 1. Clone and bring up the full stack
-git clone https://github.com/yourhandle/agent-forge.git
+git clone https://github.com/ndqkhanh/agent-forge.git
 cd agent-forge
 docker compose up -d
 
