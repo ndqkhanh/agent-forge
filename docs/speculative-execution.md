@@ -2,7 +2,7 @@
 
 **Prediction-Driven Pre-Execution for Multi-Agent Pipelines**
 
-> This document describes the design, implementation, and performance characteristics of AgentForge's speculative execution engine — the primary mechanism by which the platform achieves ~40% latency reduction on multi-step agent workflows. It is intended as a self-contained technical reference for contributors, integrators, and researchers evaluating the system.
+> This document describes the design, implementation, and performance characteristics of AgentForge's speculative execution engine — the primary mechanism by which the platform achieves \~40% latency reduction on multi-step agent workflows. It is intended as a self-contained technical reference for contributors, integrators, and researchers evaluating the system.
 
 ---
 
@@ -27,7 +27,7 @@
 
 ### The CPU Analogy
 
-Modern out-of-order CPUs do not stall when they encounter a conditional branch. Instead, the branch predictor guesses the outcome, the pipeline fetches and executes instructions along the predicted path, and the results are held in a reorder buffer. When the branch resolves, one of two things happens: if the prediction was correct, the speculative results are *committed* to architectural state and the pipeline never stalled; if the prediction was wrong, the speculative results are *flushed*, the pipeline rewinds to the branch point, and execution resumes along the correct path. The net effect is that, on well-predicted branches (~95% hit rate in modern CPUs), the processor executes at near-zero branch penalty. The cost of misprediction — pipeline flush and re-fetch — is bounded and recoverable.
+Modern out-of-order CPUs do not stall when they encounter a conditional branch. Instead, the branch predictor guesses the outcome, the pipeline fetches and executes instructions along the predicted path, and the results are held in a reorder buffer. When the branch resolves, one of two things happens: if the prediction was correct, the speculative results are *committed* to architectural state and the pipeline never stalled; if the prediction was wrong, the speculative results are *flushed*, the pipeline rewinds to the branch point, and execution resumes along the correct path. The net effect is that, on well-predicted branches (\~95% hit rate in modern CPUs), the processor executes at near-zero branch penalty. The cost of misprediction — pipeline flush and re-fetch — is bounded and recoverable.
 
 AgentForge applies the same principle to multi-agent task pipelines. Where the CPU speculates on *instruction-level branches*, AgentForge speculates on *task-level outputs*. Where the CPU uses a branch history table, AgentForge uses a hybrid LLM-and-statistical predictor. Where the CPU commits from a reorder buffer, AgentForge commits from a Redis-backed speculation buffer. The structural parallel is precise:
 
@@ -51,7 +51,7 @@ Sequential execution: **10 seconds** end-to-end. Each step blocks on the previou
 
 > "When agents are chained sequentially, total latency grows linearly with chain length. This makes long agent pipelines impractical for interactive use cases where sub-second responses are expected."
 
-With speculative execution, the critical path changes. While Step A executes, the PredictionModel predicts A's output and pre-starts Steps B through E with predicted inputs. If predictions are correct (and at ~85% hit rate on well-characterized workflows, they usually are), the effective latency drops to:
+With speculative execution, the critical path changes. While Step A executes, the PredictionModel predicts A's output and pre-starts Steps B through E with predicted inputs. If predictions are correct (and at \~85% hit rate on well-characterized workflows, they usually are), the effective latency drops to:
 
 ```
 Step A (2s) + prediction overhead (0.2s) + max(validation, commit) (0.3s) ≈ 2.5s
@@ -560,7 +560,7 @@ Let:
 - `n` = number of pipeline steps
 - `t` = average time per step (assumed uniform for simplicity)
 - `p` = prediction accuracy (probability that a speculative prediction is correct)
-- `t_overhead` = per-speculation overhead (prediction + checkpoint + validation): ~10% of `t`
+- `t_overhead` = per-speculation overhead (prediction + checkpoint + validation): \~10% of `t`
 
 **Sequential baseline:** `L_seq = n * t`
 
@@ -597,7 +597,7 @@ The following table shows expected end-to-end latency (in seconds, assuming `t =
 
 **Key observations:**
 
-- At **80% accuracy on a 5-step pipeline**, the expected latency reduction is **~40%** — this is the headline number for AgentForge and the target operating point for well-characterized workflows.
+- At **80% accuracy on a 5-step pipeline**, the expected latency reduction is **\~40%** — this is the headline number for AgentForge and the target operating point for well-characterized workflows.
 - At 90% accuracy, reductions exceed 50% on deeper pipelines, approaching the theoretical maximum (where all steps execute in parallel).
 - Even at 60% accuracy, speculation provides a 20%+ reduction — the cost-benefit inequality ensures that speculation is only attempted when expected savings exceed expected rollback cost.
 - Deeper pipelines benefit more from speculation in absolute terms, but the marginal gain per additional step decreases due to cascading confidence decay.
@@ -639,7 +639,7 @@ Speculative execution is not a new idea. It appears in CPU architecture, distrib
 | **Apache Spark Speculative Tasks** (Zaharia et al., 2010) | Slow task completion (stragglers) | Runtime comparison: task slower than median of peers | Kill slow task, use fast copy's result | 30-40% tail latency reduction on skewed clusters | Spark speculates on *duplicates of the same task* (hedging), not on *predicted outputs of successor tasks*. No output prediction; no rollback of side effects. |
 | **OCC in Databases** (Kung & Robinson, 1981) | Transaction commit success | Optimistic assumption: conflicts are rare | Abort + retry on validation failure | Higher throughput under low contention | OCC speculates that *concurrent transactions do not conflict*; AgentForge speculates on *task output content*. OCC rollback is transaction abort; AgentForge rollback is buffered-effect discard. |
 | **CDN Predictive Prefetching** (Kroeger & Long, 1997) | User's next HTTP request | Markov model over access patterns | Evict prefetched content on miss (no correction needed) | 30-50% perceived latency reduction | CDN prefetching is read-only (cache population); no write effects to isolate. AgentForge must buffer and replay write effects. Prefetch "rollback" is trivial (eviction); AgentForge rollback includes cascading multi-agent state restoration. |
-| **AgentForge Speculative Execution** | Successor task outputs in multi-agent DAG | Hybrid LLM + statistical predictor with calibrated confidence | Buffered side-effect discard + checkpoint restore + cascading rollback | **~40% latency reduction** at 80% prediction accuracy | Domain-specific: LLM-based semantic prediction for AI tasks; MCP-aware side-effect buffering; cascading speculation with multiplicative confidence decay; cost-benefit policy with dynamic threshold adjustment. |
+| **AgentForge Speculative Execution** | Successor task outputs in multi-agent DAG | Hybrid LLM + statistical predictor with calibrated confidence | Buffered side-effect discard + checkpoint restore + cascading rollback | **\~40% latency reduction** at 80% prediction accuracy | Domain-specific: LLM-based semantic prediction for AI tasks; MCP-aware side-effect buffering; cascading speculation with multiplicative confidence decay; cost-benefit policy with dynamic threshold adjustment. |
 
 **What makes AgentForge's approach novel:**
 

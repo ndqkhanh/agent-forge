@@ -24,7 +24,7 @@
 
 **Design a multi-agent orchestration system that minimizes end-to-end latency for complex AI workflows.**
 
-Sequential agent chaining — the default in most orchestration frameworks — forces each step to wait for the previous step's full output before beginning. On a 5-node pipeline with 5-second average node latency, sequential execution costs ~25 seconds on the critical path. AgentForge eliminates this serialization tax through **speculative agent execution**: a scheduling technique borrowed from CPU branch prediction that pre-starts dependent agents before their predecessors complete, achieving **~40% latency reduction** on multi-step pipelines.
+Sequential agent chaining — the default in most orchestration frameworks — forces each step to wait for the previous step's full output before beginning. On a 5-node pipeline with 5-second average node latency, sequential execution costs \~25 seconds on the critical path. AgentForge eliminates this serialization tax through **speculative agent execution**: a scheduling technique borrowed from CPU branch prediction that pre-starts dependent agents before their predecessors complete, achieving **\~40% latency reduction** on multi-step pipelines.
 
 ### Use Cases
 
@@ -54,7 +54,7 @@ Sequential agent chaining — the default in most orchestration frameworks — f
 
 | ID | Requirement | Target |
 |---|---|---|
-| **NFR-1** | Latency reduction vs sequential execution | ~40% on multi-step pipelines |
+| **NFR-1** | Latency reduction vs sequential execution | \~40% on multi-step pipelines |
 | **NFR-2** | Graceful rollback on misprediction | Rollback completes in < 500ms; no external side effects leak |
 | **NFR-3** | Observability | Full distributed tracing (OpenTelemetry); speculation hit rate dashboard (Grafana) |
 | **NFR-4** | Fault tolerance | Exactly-once event delivery via Kafka EOS; workflow recovery after orchestrator crash |
@@ -85,17 +85,17 @@ The top-level entity representing a complete workflow definition and its executi
 | Field | Type | Size (bytes) | Description |
 |---|---|---|---|
 | `workflowId` | String (ULID) | 26 | Globally unique, time-sortable identifier |
-| `name` | String | ~64 | Human-readable workflow name |
+| `name` | String | \~64 | Human-readable workflow name |
 | `version` | Int | 4 | Definition version, auto-incremented on publish |
 | `nodes` | List\<TaskNode\> | variable | Task definitions in the DAG |
 | `edges` | List\<Edge\> | variable | Dependency relationships between nodes |
 | `status` | Enum | 1 | CREATED, VALIDATING, SCHEDULED, RUNNING, PAUSED, COMPLETED, FAILED, CANCELLED |
-| `config` | WorkflowConfig | ~256 | Speculation threshold, max parallel agents, HITL settings |
+| `config` | WorkflowConfig | \~256 | Speculation threshold, max parallel agents, HITL settings |
 | `createdAt` | Instant | 8 | Submission timestamp |
 | `completedAt` | Instant? | 8 | Completion timestamp (nullable) |
-| `metadata` | Map\<String, String\> | ~512 | User-defined key-value pairs for tagging and routing |
+| `metadata` | Map\<String, String\> | \~512 | User-defined key-value pairs for tagging and routing |
 
-**Typical size:** ~5 KB for a 10-node DAG with metadata.
+**Typical size:** \~5 KB for a 10-node DAG with metadata.
 
 #### TaskNode
 
@@ -104,16 +104,16 @@ A single unit of work within the DAG, delegated to a specific agent type.
 | Field | Type | Size (bytes) | Description |
 |---|---|---|---|
 | `nodeId` | String (ULID) | 26 | Unique within the workflow |
-| `name` | String | ~64 | Human-readable task name |
-| `agentType` | String | ~32 | Primary agent type (e.g., `web-researcher`) |
-| `fallbackAgents` | List\<String\> | ~128 | Ordered fallback agent types for circuit breaker scenarios |
-| `toolRequirements` | List\<String\> | ~256 | MCP tools required (e.g., `web_search`, `code_execute`) |
+| `name` | String | \~64 | Human-readable task name |
+| `agentType` | String | \~32 | Primary agent type (e.g., `web-researcher`) |
+| `fallbackAgents` | List\<String\> | \~128 | Ordered fallback agent types for circuit breaker scenarios |
+| `toolRequirements` | List\<String\> | \~256 | MCP tools required (e.g., `web_search`, `code_execute`) |
 | `input` | ByteArray | variable | Serialized task input (Protobuf) |
 | `output` | ByteArray? | variable | Serialized task output (populated on completion) |
 | `status` | Enum | 1 | PENDING, SPECULATIVE, RUNNING, COMPLETED, FAILED, ROLLED_BACK, FAILED_OPTIONAL |
-| `retryPolicy` | RetryPolicy | ~32 | maxAttempts, backoff strategy, retryable error codes |
+| `retryPolicy` | RetryPolicy | \~32 | maxAttempts, backoff strategy, retryable error codes |
 | `timeout` | Duration | 8 | Max execution time before timeout |
-| `checkpoints` | List\<Checkpoint\> | ~128 | HITL checkpoints attached to this task |
+| `checkpoints` | List\<Checkpoint\> | \~128 | HITL checkpoints attached to this task |
 | `required` | Boolean | 1 | Whether this task is required for workflow completion |
 
 #### Edge
@@ -125,7 +125,7 @@ A directed dependency between two nodes with typed semantics.
 | `fromNodeId` | String | 26 | Source node ID |
 | `toNodeId` | String | 26 | Target node ID |
 | `type` | Enum | 1 | UNCONDITIONAL (`then`), CONDITIONAL (`conditionalThen`), SPECULATIVE (`speculativeThen`), HUMAN_CHECKPOINT |
-| `predicate` | String? | ~256 | Condition expression for CONDITIONAL edges (null for others) |
+| `predicate` | String? | \~256 | Condition expression for CONDITIONAL edges (null for others) |
 | `predictionConfidence` | Float? | 4 | Confidence score for SPECULATIVE edges (set by OutcomePredictor) |
 
 #### SpeculationBuffer
@@ -147,7 +147,7 @@ Temporary storage for speculative execution state, held in Redis with TTL.
 | `ttl` | Duration | 8 | Time-to-live; auto-discard on expiry |
 | `effectLedger` | List\<ToolIntent\> | variable | Buffered write-side-effects from MCP tool calls |
 
-**Typical size:** ~50 KB (dominated by predicted input and speculative output payloads).
+**Typical size:** \~50 KB (dominated by predicted input and speculative output payloads).
 
 #### AgentCheckpoint
 
@@ -162,11 +162,11 @@ Snapshot of agent execution state for crash recovery and speculation rollback.
 | `dagState` | ByteArray | variable | Serialized DAG execution state (completed nodes, pending nodes) |
 | `executionContext` | ByteArray | variable | Accumulated outputs from completed nodes |
 | `agentMemory` | ByteArray | variable | Agent's internal state (conversation history, tool call history) |
-| `versionChain` | List\<String\> | ~128 | Ordered list of prior checkpoint IDs for this task |
+| `versionChain` | List\<String\> | \~128 | Ordered list of prior checkpoint IDs for this task |
 | `createdAt` | Instant | 8 | Checkpoint timestamp |
 | `ttl` | Duration | 8 | Time-to-live in Redis |
 
-**Typical size:** ~10 KB per checkpoint.
+**Typical size:** \~10 KB per checkpoint.
 
 #### TaskResult
 
@@ -358,10 +358,10 @@ An internal automation system processing multi-agent AI workflows — research p
 |---|---|---|
 | Concurrent active workflows | 1,000 | Platform capacity target |
 | Average tasks per DAG | 8 | Typical pipeline: research → enrich → analyze → fact-check → summarize → review → format → deliver |
-| Speculative tasks per workflow | ~3 | 30% overhead: ~3 speculative pre-starts per 8-task DAG (top 3 highest-confidence branches) |
-| Total task executions per workflow | ~11 | 8 real + 3 speculative |
-| Workflows submitted per minute | 1,000 | ~17 workflows/sec |
-| Task dispatches per second | **~187** | 17 workflows/sec x 11 tasks/workflow |
+| Speculative tasks per workflow | \~3 | 30% overhead: \~3 speculative pre-starts per 8-task DAG (top 3 highest-confidence branches) |
+| Total task executions per workflow | \~11 | 8 real + 3 speculative |
+| Workflows submitted per minute | 1,000 | \~17 workflows/sec |
+| Task dispatches per second | **\~187** | 17 workflows/sec x 11 tasks/workflow |
 | Average task latency | 5 seconds | LLM inference + tool calls + network |
 
 ### Speculation Cost-Benefit
@@ -369,19 +369,19 @@ An internal automation system processing multi-agent AI workflows — research p
 | Metric | Value | Derivation |
 |---|---|---|
 | Speculative overhead | 30% extra tasks | 3 speculative out of 11 total |
-| Speculation hit rate | ~70-85% | Historical benchmark; calibrated predictor |
+| Speculation hit rate | \~70-85% | Historical benchmark; calibrated predictor |
 | Misprediction waste (worst case) | 30% x 30% = **9%** | 30% speculative x 30% miss rate |
-| Net latency reduction | **~40%** | Sequential 8-task pipeline: 40s. With speculation: ~24s on critical path |
+| Net latency reduction | **\~40%** | Sequential 8-task pipeline: 40s. With speculation: \~24s on critical path |
 
 ### Event Throughput (Kafka)
 
 | Metric | Value | Derivation |
 |---|---|---|
 | Lifecycle events per task | 4 | CREATED → STARTED → COMPLETED/FAILED → COMMITTED/ROLLED_BACK |
-| Events per second | **~750** | 187 tasks/sec x 4 events/task |
+| Events per second | **\~750** | 187 tasks/sec x 4 events/task |
 | Average event size | 1 KB | Protobuf-serialized task lifecycle event |
-| Kafka throughput | ~750 KB/sec | Well within single-partition capacity |
-| 7-day retention | **~450 GB** | 750 events/sec x 1 KB x 86,400 sec/day x 7 days |
+| Kafka throughput | \~750 KB/sec | Well within single-partition capacity |
+| 7-day retention | **\~450 GB** | 750 events/sec x 1 KB x 86,400 sec/day x 7 days |
 
 ### Memory Footprint (Redis)
 
@@ -390,7 +390,7 @@ An internal automation system processing multi-agent AI workflows — research p
 | Agent checkpoints | 1K workflows x 11 tasks x 10 KB/checkpoint | **110 MB** |
 | Speculation buffers | 1K workflows x 3 speculative x 50 KB/buffer | **150 MB** |
 | DAG execution context | 1K workflows x 5 KB/context | **5 MB** |
-| **Total Redis memory** | | **~265 MB** |
+| **Total Redis memory** | | **\~265 MB** |
 
 Redis 7 with 1 GB allocation provides comfortable headroom. Speculation buffers carry TTLs (default 5 minutes), so memory is self-regulating — expired buffers are evicted automatically.
 
@@ -408,11 +408,11 @@ Task 1 (5s) → Task 2 (5s) → Task 3 (5s) → ... → Task 8 (5s) = 40s total
 Critical path with 80% hit rate:
 - Task 1 executes (5s)
 - Tasks 2, 3 pre-started speculatively while Task 1 runs
-- On Task 1 completion: Task 2 already 80% done (hit) → commits in ~1s
+- On Task 1 completion: Task 2 already 80% done (hit) → commits in \~1s
 - Cascading: Task 3 was speculative on Task 2's prediction
   - Effective confidence: 0.8² = 0.64 → below threshold, Task 3 waits
 - Remaining tasks: some speculated, some sequential
-- Effective critical path: ~24s (40% reduction)
+- Effective critical path: \~24s (40% reduction)
 ```
 
 **Latency budget per task:**
@@ -1400,7 +1400,7 @@ AgentForge applies CPU speculative execution principles to multi-agent AI pipeli
 5. **State externalization (Redis)** — decouple workflow state from orchestrator process memory for crash recovery and horizontal scaling.
 6. **Dual protocol (MCP + A2A)** — separate tool integration (agent boundary) from task delegation (orchestration boundary) for independent replaceability.
 
-The result is a **~40% latency reduction** on multi-step AI pipelines with bounded misprediction cost (9% worst-case wasted compute at 70% hit rate), production-grade fault tolerance, and full observability via OpenTelemetry.
+The result is a **\~40% latency reduction** on multi-step AI pipelines with bounded misprediction cost (9% worst-case wasted compute at 70% hit rate), production-grade fault tolerance, and full observability via OpenTelemetry.
 
 ---
 

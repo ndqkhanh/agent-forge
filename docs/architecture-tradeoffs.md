@@ -24,7 +24,7 @@
 
 AgentForge implements **speculative pre-execution with cascading confidence decay**. While a predecessor task executes, the system predicts its output and speculatively launches dependent tasks with predicted inputs in parallel. When the actual result arrives, speculations are validated: hits are committed, misses trigger rollback.
 
-**Why speculate?** Sequential multi-step agent pipelines have linear latency scaling: a 5-step pipeline with 2-second tasks takes 10 seconds end-to-end. Speculative execution converts this sequential bottleneck into parallel execution with bounded rollback cost. At 80% prediction accuracy on a 5-step pipeline, realistic latency drops ~40%, from 10s to ~6s.
+**Why speculate?** Sequential multi-step agent pipelines have linear latency scaling: a 5-step pipeline with 2-second tasks takes 10 seconds end-to-end. Speculative execution converts this sequential bottleneck into parallel execution with bounded rollback cost. At 80% prediction accuracy on a 5-step pipeline, realistic latency drops \~40%, from 10s to \~6s.
 
 **Implementation** (`orchestrator/src/main/java/agentforge/orchestrator/SpeculationEngine.java`):
 - **Confidence decay per cascade level**: `effectiveConfidence = confidence * Math.pow(decayFactor, currentDepth)` (line 90)
@@ -63,7 +63,7 @@ At 80% accuracy:      Expected latency ≈ 40% reduction
 ### When the Alternative Wins
 
 **At-risk scenario 1: Low prediction accuracy**
-- If historical outcomes are near-uniform (entropy ≈ 1.0), frequency-based prediction gives ~33% confidence on 3-way classification
+- If historical outcomes are near-uniform (entropy ≈ 1.0), frequency-based prediction gives \~33% confidence on 3-way classification
 - Speculation on low-confidence predictions causes cascading rollback (expensive)
 - **Alternative**: Natural DAG parallelism (fan-out) provides speedup without speculation risk
 - Example: Unstructured text branching tasks with high variance in routing decisions
@@ -251,7 +251,7 @@ AgentForge **defers all tool calls during speculation**: buffer them in a reorde
 
 AgentForge stores **workflow state checkpoints in process memory**: a `ConcurrentHashMap<String, Checkpoint>` (line 25) within the orchestrator process.
 
-**Why in-memory?** Checkpointing is on the speculation critical path — it must complete before dependent tasks are speculatively dispatched. Redis round-trip adds ~1ms per checkpoint. For 1-2 second tasks, that's 1-2% latency cost. Checkpointing happens once per active speculation; accumulation across 5 cascaded speculations is ~5ms. In-memory is sub-microsecond, achieving ~0% overhead.
+**Why in-memory?** Checkpointing is on the speculation critical path — it must complete before dependent tasks are speculatively dispatched. Redis round-trip adds \~1ms per checkpoint. For 1-2 second tasks, that's 1-2% latency cost. Checkpointing happens once per active speculation; accumulation across 5 cascaded speculations is \~5ms. In-memory is sub-microsecond, achieving \~0% overhead.
 
 **Implementation** (`orchestrator/src/main/java/agentforge/orchestrator/CheckpointManager.java`):
 - **Checkpoint creation** (lines 35-42):
@@ -294,7 +294,7 @@ AgentForge stores **workflow state checkpoints in process memory**: a `Concurren
    - No TTL or LRU eviction
    - Mitigation: Manual hygiene, or operator-managed cleanup job
 
-4. **Memory cost**: Each checkpoint is O(completed_tasks). On a 100-task workflow with 5 active speculations, memory usage is ~500 TaskResult objects in heap.
+4. **Memory cost**: Each checkpoint is O(completed_tasks). On a 100-task workflow with 5 active speculations, memory usage is \~500 TaskResult objects in heap.
    - Each TaskResult ≈ 1KB (task ID, output string, timestamp)
    - 100 tasks × 5 speculations × 1KB ≈ 500KB per workflow
    - Not a scaling bottleneck but grows with workflow complexity
@@ -513,7 +513,7 @@ DAGs enable the core innovation: dependency structure is known upfront, so depen
 
 | Dimension | Choice | Key Trade-off | Risk Level |
 |-----------|--------|---------------|-----------|
-| **Execution Model** | Speculative pre-execution with confidence decay | Wasted compute on misses (~20-40% cascade rollback) vs ~40% latency reduction on 80% accuracy | **Medium** |
+| **Execution Model** | Speculative pre-execution with confidence decay | Wasted compute on misses (\~20-40% cascade rollback) vs \~40% latency reduction on 80% accuracy | **Medium** |
 | **Prediction Method** | Frequency-based statistical histogram | No input sensitivity, higher misses on input-variant tasks vs O(1) latency, zero external dependency | **Medium** |
 | **Side Effects** | Reorder buffer (defer execution until commit) | Placeholder results cause incorrect downstream decisions vs safe rollback guarantees | **High** |
 | **State Management** | In-memory ConcurrentHashMap checkpoints | Single point of failure, no distributed coordination vs sub-microsecond latency overhead | **Medium** |
