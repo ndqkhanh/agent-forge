@@ -1,5 +1,9 @@
+plugins {
+    `java-library`
+}
+
 // common — sealed JSON types, model records, error hierarchy
 dependencies {
-    implementation(rootProject.libs.jackson.databind)
-    implementation(rootProject.libs.jackson.datatype.jsr310)
+    api(rootProject.libs.jackson.databind)
+    api(rootProject.libs.jackson.datatype.jsr310)
 }
